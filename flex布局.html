@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	div{
+		height: 100%;
+	}
+	.clear-fix{
+		display: flex;
+	}
+	.left {
+		width: 200px;
+	}
+	.right{
+		width: 200px;
+	}
+	.middle {
+		flex:1;
+	}
+
+</style>
+<body>
+	<div class='clear-fix'>
+		<div class="left">left</div>
+		<div class='middle'>
+		   偶极热i人体而同日嗯i体贴人贴合tire提儿胡同日俄他和日托和肉体嘿嘿他和日托和和特瑞特和特人th
+		</div>
+		
+		<div class='right'>right</div>
+	</div>
+	<script>
+		var str = '012345678'
+		var res = str.slice(0,2)
+		var resSubtring = str.substring(0,2)
+		const resSubstr = str.substr(0,2)
+		console.log(str,res,resSubtring, resSubstr)
+
+		 const defaultParams = {
+        sortType: 'createTime',
+        order: 'DESC',
+        type:11, // 模板是1，默认为0
+      };
+
+     console.log({...defaultParams})
+
+	</script>
+</body>
+</html>

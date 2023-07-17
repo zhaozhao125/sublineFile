@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .content {
+        width: 320px;
+        height: 136px;
+        border-radius: 12px;
+        background: #fff0f1;
+        padding: 24px;
+        display: flex;
+        align-items: center;
+      }
+      .content-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+      .qianggou {
+        width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    </style>
+    <div class="content">
+      <div class="content-flex">
+        <div>
+          <p>杭州市优惠券</p>
+          <p>123456</p>
+        </div>
+        <div class="qianggou">抢购斯菲斯沙发沙发沙发沙发沙发发</div>
+      </div>
+    </div>
+    <script>
+      for (let i = 1; i < 61; i++) {
+        setTimeout(() => {
+          console.log(i);
+        }, 1000 * i);
+      }
+    </script>
+  </body>
+</html>

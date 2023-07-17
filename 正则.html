@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #diagramContainer {
+      padding: 20px;
+      width: 80%;
+      height: 400px;
+      border: 1px solid gray;
+    }
+
+    .item {
+      position: absolute;
+      height: 80px;
+      width: 80px;
+      border: 2px solid blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="diagramContainer">
+    <div id="item_left" class="item"></div>
+    <div id="item_right" class="item" style="left:150px;"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jsplumb@2.8.0/dist/js/jsplumb.min.js"></script>
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script> -->
+  <script>
+    const outer = document.querySelectorAll('.item')
+    console.log(outer, 'outer')
+    /* global jsPlumb */
+    jsPlumb.ready(function () {
+      var common = {
+        endpoint: 'Rectangle',
+        connector: ['Flowchart',{ alwaysRespectStubs: true,cornerRadius: 16, stub: 16}],
+        anchor: ['Left', 'Right']
+      }
+
+      jsPlumb.connect({
+        source: 'item_left',
+        target: 'item_right',
+        paintStyle: { stroke: 'lightgray', strokeWidth: 3 },
+        endpointStyle: { fill: 'lightgray', outlineStroke: 'darkgray', outlineWidth: 2 },
+        overlays: [ ['Arrow', { width: 12, length: 12, location: 1 }] ]
+      }, common)
+
+      jsPlumb.draggable('item_left')
+      jsPlumb.draggable('item_right')
+    })
+//     var arr = [1, 2, 3, 4];
+//    var sum = arr.reduce(function(prev, cur, index, arr) {
+//     console.log(prev, cur, index);
+//        return prev + cur;
+//    })
+// console.log(arr, sum);
+var result = [
+    {
+        subject: 'math',
+        score: 10
+    },
+    {
+        subject: 'chinese',
+        score: 20
+    },
+    {
+        subject: 'english',
+        score: 30
+    }
+];
+
+var sum = result.reduce(function(prev, cur) {
+    console.log(prev, cur)
+    return cur.score + prev;
+}, 1);
+console.log(sum) //60
+const obj = {
+  key: '测试',
+  index:1,
+  id: '12345'
+}
+
+const regex = /({\S+?})/g
+const string = '{key}-{index}是{id}'
+let res = string.match(regex)
+console.log(res, 'res')
+let getConcat = string.replace(regex, res)
+// console.log(getConcat, 'concat')
+// var regex = /^({\S+?})/g;
+// var string = "{ab}-{abc}shi{ssss}";
+
+// // var result = string.replace(regex, "[]");
+// console.log(result); 
+// // console.log(string.replace(regex, "j"))
+
+var result = string.replace(regex, function(res) {
+  console.log(res, 'res')
+  res.slice(1, res.length -1)
+  const key =  res.slice(1, res.length -1)
+  return obj[key]
+  // console.log(RegExp.$)
+  // console.log(RegExp.$2)
+  //  console.log(RegExp.$3)
+  // return RegExp.$2 + "/" + RegExp.$3 + "/" + RegExp.$1;
+});
+console.log(result)
+
+
+let arr = [
+  {
+    name: 'zhao'
+  },
+  {
+    name: '123'
+  }
+]
+
+let res1 = arr.reduce((pre, cur) => {
+   return pre.name + '、' +  cur.name
+})
+console.log(res1, 'res')
+
+
+
+var m = { a: 1 }
+var n = { a: 1 }
+console.log(m == n) // false
+// 虽然没有赋值给变量，但比较的还是栈内存中的值引用
+console.log({ a:1 } == { a:1 }) // false
+console.log(+0 === -0)
+console.log(NaN == NaN)
+const obj1 = {
+  a:{c:1},
+  b:2
+}
+console.log(Object.entries(obj1), 'entry')
+
+
+
+
+const map = new Map([
+  [1], [2]
+]);
+console.log(map)
+
+// for (let key of map.keys()) {
+//   console.log(key);
+// }
+// console.log(map)
+
+// let obj2 = {"a":1, "b":2};
+// let map1 = new Map(Object.entries(obj2));
+// console.log(map1, 'mm1')
+// console.log(Object.entries(obj2))
+const arr1 = '/^[0-9]*$/'
+ const isRegExp = new RegExp(/^\/.+\/$/).test(arr1);
+
+const exprection = arr1.slice(1,arr1.length -1 )
+console.log(exprection, 'exprection')
+const reg = new RegExp((exprection))
+console.log(reg.test('ww'))
+  </script>
+}
+</body>
+
+</html>

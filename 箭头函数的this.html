@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const oo = {
+        a: function() {
+          console.log(this, 'this1')
+          return function() {
+            return function() {
+              console.log(this, 'this')
+            }
+          }
+        }
+      }
+      oo.a()()()
+
+
+    function foo() {
+      return () => {
+        console.log(this, 'this 的指向是固定的，始终指向外层函数的 this。箭头函数的 this 指向是静态的，一旦确定了指向，就无法更改')
+      }
+    }
+    const obj1 = {a:1}
+    const obj2 = {a:2}
+    const callBackFn  = foo.call(obj2)
+    callBackFn()
+  </script>
+</body>
+</html>

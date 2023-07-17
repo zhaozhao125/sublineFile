@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function query(value) {
+        class queryClass {
+          constructor(value) {
+            this.value = value;
+          }
+          add(v) {
+            this.value += v;
+            return this;
+          }
+          minus(v) {
+            this.value -= v;
+            return this;
+          }
+          multi(v) {
+            this.value = this.value * v;
+            return this;
+          }
+          div(v) {
+            this.value = this.value / v;
+            return this;
+          }
+          getValue() {
+            return this.value;
+          }
+        }
+        return new queryClass(value);
+      }
+      const queryObj = query(1).add(12).minus(3).multi(10).div(5).getValue();
+    </script>
+  </body>
+</html>

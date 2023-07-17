@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" oninput="myFunction()" />
+    <script>
+      var addStrings = function (num1, num2) {
+        let len1 = num1.length;
+        let len2 = num2.length;
+        let arr = [];
+        let i = len1 - 1;
+        let j = len2 - 1;
+        let more = 0;
+        while (i >= 0 || j >= 0) {
+          let single1 = parseInt(num1.charAt(i)) || 0;
+          let single2 = parseInt(num2.charAt(j)) || 0;
+          let cur = (single1 + single2 + more) % 10;
+          more = Math.floor((single1 + single2 + more) / 10);
+          arr.push(cur);
+          i--;
+          j--;
+        }
+        if (more) arr.push(more);
+        return arr.reverse().join("");
+      };
+      let res = addStrings("0.1", "0.2");
+      console.log(res);
+
+      // function foo() {
+      //   a = 1;
+      //   console.log(a);
+      // }
+
+      // foo(); // ???
+
+      console.log(fuc);
+      console.log(foo);
+
+      var fuc = function foo() {
+        console.log("foo");
+      };
+
+      var foo = 1;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" oninput="myFunction()" />
+    <script>
+      // var isIsomorphic = function (s, t) {
+      //   const arr = [...s];
+      //   let obj = {};
+      //   let obj2 = {};
+      //   for (var i = 0; i < arr.length; i++) {
+      //     if (obj[arr[i]]) {
+      //       if (obj[arr[i]] !== t[i]) {
+      //         return false;
+      //       }
+      //     } else {
+      //       obj[arr[i]] = t[i];
+      //     }
+      //     if (obj2[t[i]]) {
+      //       if (obj2[t[i]] !== arr[i]) {
+      //         return false;
+      //       }
+      //     } else {
+      //       obj2[t[i]] = arr[i];
+      //     }
+      //   }
+      //   console.log(obj);
+      //   return true;
+      // };
+      var isIsomorphic = function (s, t) {
+        const arr = [...s];
+        for (var i = 0; i < arr.length; i++) {
+          console.log(s.indexOf(arr[i]));
+          console.log(t.indexOf(t[i]));
+          if (s.indexOf(arr[i]) !== t.indexOf(t[i])) {
+            return false;
+          }
+        }
+        return true;
+      };
+      const res = isIsomorphic("baba", "badb");
+      console.log("res1: ", res);
+    </script>
+  </body>
+</html>

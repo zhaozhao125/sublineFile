@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+       function debounce(value) {
+          console.log(value, 'v')
+       }
+    </script>
+    <input type="text" oninput="debounce(e)">
+    <script>
+
+      // for (let i = 0; i < 5; i++) {
+      //   setTimeout(() => {
+      //     console.log(i);
+      //   }, 1000 * i);
+      // }
+
+      // for (var i = 0; i < 5; i++) {
+      //   (function (i) {
+      //     setTimeout(() => {
+      //       console.log(i);
+      //     }, i * 1000);
+      //   })(i);
+      // }
+
+    //   let arr = [];
+    //   for (var i = 0; i < 5; i++) {
+    //     arr[i] = (function (i) {
+    //       return function () {
+    //         console.log(i);
+    //       };
+    //     })(i);
+    //   }
+    //   arr[1]();
+
+    // const MyReact = (function () {
+    //   function myUseState(initValue) {
+    //     let _value = initValue;
+    //     const state = _value;
+    //     const setState = (newValue) => {
+    //       console.log(newValue, 'newValue')
+    //       _value = newValue;
+    //     };
+    //     return [state,_value, setState];
+    //   }
+    //   return { myUseState };
+    // })();
+
+    // const [count,_value, setCount] = MyReact.myUseState(1); 
+
+
+    // var a = '林一一'
+    // function foo(){
+    //     // var a = 'foo'
+    //     function fo(){
+    //         console.log(a)
+    //     }
+    //     return fo
+    // }
+
+    // function f(p){
+    //     var a = 'f'
+    //     p()
+    // }
+    // f(foo())
+
+
+
+// function curry(fn, len = fn.length) {
+//     console.log(fn, 'fn')
+//     console.log(fn.length, 'fn')
+
+//     return _curry(fn, len)
+// }
+
+// function _curry(fn, len, ...arg) {
+//     return function (...params) {
+//         let _arg = [...arg, ...params]
+//         if (_arg.length >= len) {
+//             return fn.apply(this, _arg)
+//         } else {
+//             return _curry.call(this, fn, len, ..._arg)
+//         }
+//     }
+// }
+
+// let fn = curry(function (a, b, c, d, e) {
+//     console.log(a + b + c + d + e)
+// })
+
+// fn(1, 2, 3, 4, 5)  // 15
+// fn(1, 2)(3, 4, 5)
+// fn(1, 2)(3)(4)(5)
+// fn(1)(2)(3)(4)
+
+
+var data = [];
+
+for (var i = 0; i < 3; i++) {
+    (function(j){
+      // setTimeout( data[j] = function () {
+      //   console.log(j);
+      // }, 0)
+      data[j] = function () {
+        console.log(j);
+      }
+    })(i)
+}
+
+// data[0]();
+// data[1]();
+// data[2]()
+
+
+var result = [];
+var a = 3;
+var total = 0;
+  console.log(result, 'result')
+function foo(a) {
+
+    for (var i = 0; i < 3; i++) {
+
+        result[i] = function () {
+            total += i * a;
+            console.log(total);
+        }
+    }
+}
+
+foo(1);
+console.log(result, 'result')
+console.log(i, 'i')
+result[0]();  // 3
+result[1]();  // 6
+result[2]();  // 9
+
+
+
+
+    </script>
+  </body>
+</html>
+
+

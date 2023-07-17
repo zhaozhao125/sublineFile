@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // function find(arr) {
+      //   let mapData = new Map();
+      //   for (var i = 0; i < arr.length; i++) {
+      //     console.log();
+      //     mapData.set(arr[i], (mapData.get(arr[i]) || 0) + 1);
+      //   }
+      //   return mapData;
+      // }
+      // const res = find([1, 2, 3, 4, 3, 2, "a", "a"]);
+      // console.log("res: ", res);
+      // console.log(...res.values());
+      // console.log(Math.min(...res));
+
+      var uniqueOccurrences = function (arr) {
+        // 记录每个元素出现次数
+        let map = new Map();
+        arr.forEach((x) => {
+          map.set(x, (map.get(x) || 0) + 1);
+        });
+        // Set() 里的元素是不重复的。如果有元素出现次数相同，则最后的set的长度不等于map的长度
+        console.log(map.size, "1");
+        console.log(map.values(), "2");
+        console.log(new Set(map.values()).size, "3");
+        return map;
+        // return map.size === new Set(map.values()).size;
+      };
+      const res1 = uniqueOccurrences([1, 2, 3, 4, 3, "2"]);
+      console.log(res1);
+
+      // const mm = Math.max([1, 2, 3, 6]);
+      // console.log("Math: ", mm);
+
+      // var numbers = [5, 458, 120, -215, 228, 400, 122205, -85411];
+
+      // var maxInNumbers = Math.max.apply(Math, numbers);
+      // console.log("maxInNumbers: ", maxInNumbers);
+
+      // var minInNumbers = Math.min.apply(Math, numbers);
+      // var minInNumbers1 = Math.min(...numbers);
+      // console.log("minInNumbers: ", minInNumbers);
+      // console.log("minInNumbers: ", ...numbers);
+    </script>
+  </body>
+</html>

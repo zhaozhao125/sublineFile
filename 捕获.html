@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .father {
+            overflow: hidden;
+            width: 300px;
+            height: 300px;
+            margin: 100px auto;
+            background-color: pink;
+            text-align: center;
+            position: relative;
+        }
+
+        .son {
+            width: 200px;
+            height: 200px;
+            margin: 50px;
+            background-color: purple;
+            line-height: 200px;
+            color: #fff;
+            position: absolute;
+            clip:rect(0px,60px,200px,0px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father">
+        <div class="son">son盒子er5te erterr eret rtretretret rtretretretre tre rtretretet rterter ttretretr </div>
+    </div>
+    <script>
+        /*
+        var son = document.querySelector('.son');
+        son.addEventListener('click', function() {
+            console.log('son');
+        }, true);
+        var father = document.querySelector('.father');
+        father.addEventListener('click', function() {
+            console.log('father');
+        }, true);
+        document.addEventListener('click', function() {
+            console.log('document');
+        }, true); */
+
+         var son = document.querySelector('.son');
+        son.addEventListener('click', function() {
+            console.log('son');
+        }, false);
+        var father = document.querySelector('.father');
+        father.addEventListener('click', function() {
+            console.log('father');
+        }, false);
+        document.addEventListener('click', function() {
+            console.log('document');
+        }, false);
+
+
+
+
+           // 实际上是Object.is()的polyfill
+    function is(x, y) {
+        // SameValue algorithm
+        if (x === y) {
+            // 处理为+0 != -0的情况
+            return x !== 0 || 1 / x === 1 / y;
+        } else {
+            // 处理 NaN === NaN的情况
+            return x !== x && y !== y;
+        }
+    };
+
+        function shallowEqual(objA,objB) {
+          if (is(objA, objB)) {
+            return true;
+          }
+
+          if (
+            typeof objA !== 'object' ||
+            objA === null ||
+            typeof objB !== 'object' ||
+            objB === null
+          ) {
+            return false;
+          }
+
+          const keysA = Object.keys(objA);
+          const keysB = Object.keys(objB);
+
+          if (keysA.length !== keysB.length) {
+            return false;
+          }
+
+          // Test for A's keys different from B.
+          for (let i = 0; i < keysA.length; i++) {
+            if (
+              !hasOwnProperty.call(objB, keysA[i]) ||
+              !is(objA[keysA[i]], objB[keysA[i]])
+            ) {
+              return false;
+            }
+          }
+
+          return true;
+        }
+
+        console.log(shallowEqual({a:1}, {a:1}),'equal')
+
+        const m = {a:1}
+        
+
+
+        function defineReactive(data, key, val) {
+        observe(val); // 递归遍历所有子属性
+        Object.defineProperty(data, key, {
+            enumerable: true,
+            configurable: true,
+            get: function() {
+                return val;
+            },
+            set: function(newVal) {
+                val = newVal;
+                console.log('属性' + key + '已经被监听了，现在值为：“' + newVal.toString() + '”');
+            }
+        });
+    }
+ 
+    function observe(data) {
+        if (!data || typeof data !== 'object') {
+            return;
+        }
+        Object.keys(data).forEach(function(key) {
+            defineReactive(data, key, data[key]);
+        });
+    };
+    
+    var library = {
+    book1: {
+            name: ''
+        },
+    book2: ''
+    };
+    observe(library);
+ //   library.book1.name = 'vue权威指南'; // 属性name已经被监听了，现在值为：“vue权威指南”
+    library.book2 = '没有此书籍';  // 属性book2已经被监听了，现在值为：“没有此书籍”
+    console.log(library, 'library')
+
+    </script>
+        
+
+
+
+</body>
+
+</html>

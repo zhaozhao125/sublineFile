@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>css</title>
+  </head>
+
+  <body>
+    
+    <div class="viewport">
+      <!-- 容器元素 -->
+      <div class="container">
+        <!-- 文章:粘性约束元素 -->
+        <div class="article">
+
+          <div class="article-content">...</div>
+          <div class="sticky-header">
+            <h2>彻底理解粘性定位 - position: sticky</h2>
+            <div class="options">
+              <button>转发</button>
+              <button>点赞</button>
+            </div>
+          </div>
+      </div>
+
+    </div>
+  
+
+    <style type="text/css">
+      .top-content {
+        height: 500px;
+        width: 100%;
+      }
+      .viewport {
+        width: 50%;
+        overflow: hidden;
+        height: 500px;
+      }
+      /* 容器元素 */
+      .container {
+        overflow: auto;
+        height: 100%;
+      }
+      /* 粘性约束元素 */
+      .article {
+        margin-bottom: 10px;
+      }
+      /* sticky 元素 */
+      .sticky-header {
+        position: sticky;
+        bottom: 0;
+        padding: 5px 0;
+        background-color:#fff;
+      }
+      .article-content {
+        height: 1000px;
+      }
+    </style>
+    <script>
+
+     const date = 11111
+     const tt = 221111
+    if ((date ?? 0) > (tt??0)) {
+      console.log(111111111111)
+    }
+
+
+    const createdById = 123
+    const currentUser = {
+      id: 11
+    }
+    const editPermissionType = 'alone'
+    const canEditByPermission =  editPermissionType !== 'alone' ? true : createdById === currentUser?.id;
+    console.log('canEditByPermission: ', canEditByPermission);
+      // let memorize = [1, 1];
+      // let fib = function (n) {
+      //   if (!memorize[n - 1]) {
+      //     memorize[n - 1] = fib(n - 1) + fib(n - 2);
+      //   }
+      //   return memorize[n - 1];
+      // };
+      // const res = fib(3);
+
+      // let fibFindIndex = function (num) {
+      //   let a = 1,
+      //     b = 1,
+      //     sum = 0,
+      //     index = 2;
+      //   while (sum < num) {
+      //     sum = a + b;
+      //     a = b;
+      //     b = sum;
+      //     index++;
+      //   }
+      //   console.log(sum);
+      //   return sum === num ? index : -1;
+      // };
+      // const index1 = fibFindIndex(5);
+      // console.log("index1: ", index1);
+
+      /*
+         斐波那契数列
+         0,1,1,2,3,5,8
+       */
+      function fibNormal(n) {
+        if (n <= 1) {
+          return n;
+        }
+        return fibNormal(n - 1) + fibNormal(n - 2);
+      }
+      const fibNormalres = fibNormal(14);
+      /*
+         斐波那契缓存：动态规划
+         0,1,1,2,3,5,8
+       */
+      console.time();
+      function fibDp(n) {
+        const array = [0, 1];
+        for (var i = 2; i <= n; i++) {
+          array[i] = array[i - 1] + array[i - 2];
+        }
+        return array[n];
+      }
+      const res = fibDp(6);
+      console.log("res: ", res);
+      console.timeEnd();
+
+      var data = {
+        a: 1,
+      };
+      var dataCreate = data;
+      data.a = 2;
+      console.log(dataCreate);
+
+      console.log(dataCreate);
+      const fields = [
+        {
+          fieldType: {
+            component: "data1111",
+          },
+          key: "data2",
+        },
+        {
+          fieldType: {
+            component: "data",
+          },
+          key: "data1",
+        },
+        {
+          fieldType: {
+            component: "data",
+          },
+          key: "data2",
+        },
+      ];
+      const values = {
+        data1: ["aaa"],
+        data2: ["aaa"],
+      };
+      const result = fields.reduce((pre, cur) => {
+        if (cur.fieldType.component === "data") {
+          return pre.concat(values[cur.key]);
+        } else {
+          return pre;
+        }
+
+        // return [...pre]
+      }, []);
+      console.log(result, "result");
+
+      let name = "item_link_doc_3.3.4.zip";
+
+      name = name.replace("item_link_doc", "old_item_link_doc");
+      console.log("name: ", name);
+    </script>
+  </body>
+</html>

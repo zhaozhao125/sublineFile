@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// function timeInter (fn, delay) {
+
+		// 	const callback = function() {
+		// 	  const timer = setTimeout(() => {
+  //                fn()
+  //                callback()
+		// 	  }, delay)
+		// 	}
+  //           callback()
+		// }
+		// myfn = function () {
+		// 	console.log(11111)
+		// }
+		// timeInter(myfn, 1000)
+
+ 
+     // 从1-5打印 interval的形式
+     function printNumber (from, to) {
+     	let count = from
+     	function fn() {
+     	    console.log(count, 'count')
+        	count ++ 
+     	}
+     	fn()
+        const interval = setInterval(() => {
+            if(count === to) {
+               clearInterval()
+               return
+            }
+            fn()
+
+        }, 1000)
+     }
+     //printNumber(1, 10)
+
+     // function printNumberTimtout(from, to) {
+     // 	let count = from
+     	
+     //    function fn() {
+     //    	console.log(count, 'count')
+     //    	count++
+     //    	if (count <= to) {
+     //           const timer = setTimeout(() => {
+     //    	      clearTimeout(timer)
+     //              fn()
+     //    	  }, 1000)
+     //    	}
+
+     //    }
+     //    fn()    	
+     // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function printNumber(to, from) {
+    	let count = to
+    	function fn() {
+    		console.log(count)
+    		if(count <5) {
+    		    const timer = setTimeout(() => {
+    		     clearTimeout(timer)
+                 count++
+                 fn()
+    	    	}, 1000)
+    		}
+
+    	}
+        fn()
+    }
+    printNumber(1,5)
+
+     // printNumberTimtout(1,5)
+
+     
+
+  //       function parallelLimit(fns, limit) {
+		// 	let len = fns.length;
+		// 	let result = Array(len).fill(false);
+		// 	let count = 0;
+
+		// 	return new Promise(resolve => {
+		// 		function next(index) {
+		// 			console.info('index', index, count);
+		// 			if (!fns[index]) return;
+
+		// 			fns[index]()
+		// 				.then(res => { result[index] = res })
+		// 				.catch(e => { result[index] = e?.message || '失败' })
+		// 				.finally(() => {
+		// 					if (count < len) {
+		// 						next(count++);
+		// 					} else if (!result.includes(false)) {
+		// 						resolve(result);
+		// 					}
+		// 				})
+		// 		}
+
+		// 		while(count < limit) {
+		// 			next(count++);
+		// 		}
+		// 	})
+		// }
+
+  //        let fns = [10, 2, 7, 4, 5, 6, 3, 8, 9, 1].map(
+		//     index => () => 
+		//       new Promise(resolve =>
+		//         setTimeout(() => {
+		//           console.info(index);
+		//           resolve(index);
+		//         }, 100 * index),
+		//       ),
+		//   );
+	
+		// console.info(fns);
+		// parallelLimit(fns, 2);
+
+	</script>
+
+  
+</body>   
+</html>

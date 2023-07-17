@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+
+</style>
+<body>
+	<div class='clear-fix'>
+
+	</div>
+	<script>
+var lengthOfLongestSubstring = function(s) {
+   var sArr = [...s]
+   for (var i=0; i< sArr.length;i++) {
+    console.log(i)
+    if(i==2) {
+      break
+    }
+     for (var j=0; j < sArr.length; j++) {
+      if(j == 1) {
+        continue
+        console.log('i=1')
+      } else {
+        console.log('打印了' + j)
+      }
+     }
+   }
+};
+var res1 = lengthOfLongestSubstring("xxzqi")
+
+
+	</script>
+</body>
+</html>

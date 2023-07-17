@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    const data = [
+      { id: 2, parent_id: 0, name: "上海市" },
+      { id: 12, parent_id: 1, name: "朝阳区" },
+      { id: 241, parent_id: 24, name: "田林街道" },
+      { id: 31, parent_id: 3, name: "广州市" },
+      { id: 13, parent_id: 1, name: "昌平区" },
+      { id: 2421, parent_id: 242, name: "上海科技绿洲" },
+      { id: 21, parent_id: 2, name: "静安区" },
+      { id: 242, parent_id: 24, name: "漕河泾街道" },
+      { id: 22, parent_id: 2, name: "黄浦区" },
+      { id: 11, parent_id: 1, name: "顺义区" },
+
+      { id: 24, parent_id: 2, name: "徐汇区" },
+      { id: 1, parent_id: 0, name: "北京市" },
+      { id: 2422, parent_id: 242, name: "漕河泾开发区" },
+      { id: 32, parent_id: 3, name: "深圳市" },
+      { id: 33, parent_id: 3, name: "东莞市" },
+      { id: 3, parent_id: 0, name: "广东省" },
+    ];
+    // 方法一
+    // function toTree(data, rootId) {
+    //   let keyMap = {};
+    //   let res = [];
+    //   for (item of data) {
+    //     const { id, parent_id } = item;
+    //     if (!keyMap[id]) {
+    //       keyMap[id] = {};
+    //     }
+    //     keyMap[id] = keyMap[id].children
+    //       ? {
+    //           ...item,
+    //           children: keyMap[id].children,
+    //         }
+    //       : item;
+    //     if (parent_id === rootId) {
+    //       res.push(keyMap[id]);
+    //     } else {
+    //       if (!keyMap[parent_id]) {
+    //         keyMap[parent_id] = {};
+    //       }
+    //       if (!keyMap[parent_id].children) {
+    //         keyMap[parent_id].children = [];
+    //       }
+    //       keyMap[parent_id].children.push(keyMap[id]);
+    //     }
+    //   }
+    //   return res;
+    // }
+
+    // 方法二
+    // function toTree(data, root) {
+    //   const res = [];
+    //   // 转化为map
+    //   const mapKey = {};
+    //   for (let item of data) {
+    //     mapKey[item.id] = item;
+    //   }
+    //   for (let item of data) {
+    //     const { id, parent_id } = item;
+    //     if (parent_id === root) {
+    //       res.push(mapKey[id]);
+    //     } else {
+    //       mapKey[parent_id].children
+    //         ? mapKey[parent_id].children.push(mapKey[id])
+    //         : (mapKey[parent_id].children = [mapKey[id]]);
+    //     }
+    //   }
+    //   mapKey[2].name = "上海2";
+    //   console.log(mapKey, "mapKey");
+    //   return res;
+    // }
+
+    // 方法三
+    function toTree(data, pid) {
+      return data
+        .filter((ele) => ele.parent_id === pid)
+        .map((m) => ({ ...m, children: toTree(data, m.id) }));
+    }
+    const normalData = toTree(data, 0);
+    console.log("rr: ", normalData);
+    // 深度优先遍历
+    // function tree2list(tree) {
+    //   const list = [];
+    //   const queue = [...tree];
+    //   while (queue.length) {
+    //     const node = queue.shift();
+    //     console.log("node: ", node);
+    //     // const children = node.children;
+    //     const { children, ...rest } = node;
+    //     if (children) {
+    //       queue.push(...children);
+    //     }
+
+    //     list.push(rest);
+    //   }
+    //   return list;
+    // }
+
+    //递归
+
+    function tree2list(tree) {
+      let resList = [];
+      for (let item of tree) {
+        if (item.children.length) {
+          resList.push(...tree2list(item.children));
+        }
+        delete item.children;
+        resList.push(item);
+      }
+      return resList;
+    }
+
+    const normal = tree2list(normalData);
+    console.log("normal: ", normal);
+  </script>
+</html>

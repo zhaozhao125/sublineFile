@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" oninput="myFunction()" />
+    <script>
+      const arr = [1, 2, 3, 3, 4, 5, 5];
+      // 方法一
+      //const res1 = [...new Set(arr)];
+
+      //  方法二
+      const testData = {};
+      function test(testData) {
+        testData.a = 456;
+      }
+      test(testData);
+      console.log(testData);
+      setTimeout(() => {
+        console.log("Hello World!");
+      }, 3000);
+
+      let iqlValue = 123;
+      const res = (iqlValue ?? true) === iqlValue;
+      console.log(res, "res");
+
+      const arr1 = [{ a: 1 }, undefined];
+      const options = [{ label: "a", value: 123 }];
+      const value = [];
+      const valueOptions = () => {
+        if (
+          Array.isArray(options) &&
+          options.length >= 1 &&
+          value &&
+          Array.isArray(value)
+        ) {
+          return value
+            .map((val) => {
+              return options.find((opt) => opt?.value === val);
+            })
+            .filter(Boolean);
+        }
+        return [];
+      };
+      console.log(valueOptions(), "res");
+      const arr2 = [1, 2, 3, 4];
+
+      console.log("qq: ", arr2.concat([6]));
+      const url = new URL("http://yinqing.one.dev.gitee.work:80/api/project");
+      console.log(URL, "URL");
+      console.log(url);
+
+      const workspaceRolesMap = {
+        空间管理员: [],
+        空间创建人: ["jasPZZVVEQ"],
+        需求组组长: ["wB3FjV0BeC", "04snZm7KyZ", "jasPZZVVEQ"],
+        需求组组员: ["BD7hTfgZUk", "p1Mr0vk36B"],
+        标准组组长: [],
+        标准组组员: [],
+        项目经理: ["jasPZZVVE2", "jasPZZVVEQ"],
+        项目副经理: [],
+      };
+      const createdBy = "jasPZZVVEQ";
+      const ress = Object.keys(workspaceRolesMap).reduce(
+        (pre, cur, curIndex, array) => {
+          console.log(array, "array");
+          if (workspaceRolesMap[array[curIndex]]?.indexOf(createdBy) !== -1) {
+            return [...pre, cur];
+          } else {
+            return [...pre];
+          }
+        },
+        []
+      );
+      console.log(ress, "ress");
+      console.log(...(null || []), "接口");
+      const myarr = ["111", "222", "333"];
+      const myarr11 = myarr.slice(0, 2);
+      console.log(myarr, "myarr");
+      console.log(myarr11, "myarr11");
+    </script>
+  </body>
+</html>

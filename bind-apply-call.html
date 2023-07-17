@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+
+
+     Function.prototype.myCall = function(context, ...args) {
+     	 if (typeof context === 'undefined') {
+            context = window
+     	 }
+         const mySymbol = Symbol()
+         context[mySymbol] = this
+         const fn = context[mySymbol](...args)
+         delete context[mySymbol]
+         return fn
+     }
+
+
+     // const callFn = {
+     // 	name: 'tom',
+     // 	say: function(value) {
+     // 		console.log(this, 'this')
+     // 		console.log(value, 'value')
+     // 	}
+     // }
+
+     // const callObj = {
+     // 	name: 'tom2'
+     // }
+     // callFn.say.myCall(callObj, 'call')
+
+
+
+
+
+    Function.prototype.myBind = function(context) {
+    	console.log(context, 'context')
+
+    	if (typeof context === 'undefined') {
+          context = window
+    	}
+
+    	const fn = this
+        const args1 = Array.prototype.slice.call(arguments, 1)
+
+        return function() {
+        	const bindArgs = Array.prototype.slice.call(arguments)
+        	const newArgs = [...args1, ...bindArgs]
+            return fn.apply(context, newArgs)
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	  // Function.prototype.myBind = function (context) {
+	  // 	console.log(arguments, 'arguments')
+	      
+		 //  var fn = this; // 原函数
+		 //  var args = Array.prototype.slice.call(arguments, 1); // 从第二个参数开始的其他参数
+   //        console.log(args, 'args')
+		 //  return function () {
+		 //    var bindArgs = Array.prototype.slice.call(arguments); // bind() 方法的参数
+		 //    console.log(bindArgs, 'bindArgs')
+		 //    var combinedArgs = args.concat(bindArgs); // 合并 bind() 方法的参数和新函数调用时的参数
+		 //    console.log(combinedArgs, 'combinedArgs')
+		 //    console.log(context, 'context')
+		 //    return fn.apply(context, combinedArgs); // 使用 apply() 方法设置 this 值并调用原函数
+		 //  };
+   //   };
+
+	const person = {
+		name: 'tom',
+		say: function(arg) {
+			console.log(arg, 'arg')
+            console.log(this.name)
+		}
+	}
+    
+    const obj = {
+    	name: 'tom3'
+    }
+    
+    const mybind = person.say.myBind(obj, [1])
+    console.log(mybind, 'mybind')
+    mybind('a')
+
+	</script>
+</body>
+</html>

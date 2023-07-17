@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" oninput="myFunction()" />
+    <script>
+      const arr = [1, 2, 34, 7, 3, 4];
+      let max = arr[1];
+      arr.forEach((ele) => {
+        if (ele > max) {
+          max = ele;
+        }
+      });
+      console.log(max);
+      console.log(Math.max(...arr));
+      console.log(Math.max(1, 2, 3, 45), "3");
+      var max1 = Math.max.apply(null, arr);
+      console.log("max: ", max1);
+    </script>
+  </body>
+</html>

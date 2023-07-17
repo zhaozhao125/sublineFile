@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="content">点击</div>
+    <script>
+      const con = document.querySelector(".content");
+      function clickFC() {
+        console.log(this);
+        con.removeEventListener("click", clickFC);
+      }
+      con.addEventListener("click", clickFC);
+
+      console.log("con: ", con);
+      // 创建DOM
+      // function createElement(dom, params) {
+      //   var domObj = document.createElement(dom);
+      //   domObj.onclick = params.onclick;
+      //   domObj.innerHTML = "Hello";
+      //   document.body.appendChild(domObj);
+      // }
+
+      // // Demo类
+      // class Demo {
+      //   handleClick() {
+      //     console.log(this);
+      //   }
+
+      //   render() {
+      //     createElement("button", {
+      //       onclick: this.handleClick,
+      //     });
+      //   }
+      // }
+    </script>
+  </body>
+</html>

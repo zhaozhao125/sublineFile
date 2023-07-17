@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function loopString(value) {
+        let index = 0;
+        let currentStr = "";
+        return () => {
+          if (index === value.length) {
+            index = 0;
+          }
+          currentStr = value[index];
+          index++;
+          return currentStr;
+        };
+      }
+      const bar = loopString("abcd");
+      console.log(bar(), bar(), bar(), bar(), bar(), bar(), bar(), bar());
+    </script>
+  </body>
+</html>

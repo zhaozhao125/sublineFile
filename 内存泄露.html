@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+<div style="position:relative;">
+	<input type="text" id="input"/>
+	<div  style="position: absolute;">1111111</div>
+	<div style="position: absolute;">
+		<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;left:0px top:0px">
+		    <title>切片</title>
+		    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		        <g id="字段配置" transform="translate(-299.000000, -483.000000)">
+		            <g id="编组" transform="translate(244.000000, 450.000000)">
+		                <g id="Selects-/-Single-select-/-Default备份-3" transform="translate(-0.000000, 0.000000)">
+		                    <g id="编组-4" transform="translate(0.000000, 30.000000)">
+		                        <g id="Add" transform="translate(55.000000, 3.000000)">
+		                            <g id="编组-15" transform="translate(1.125000, 1.125000)">
+		                                <circle id="椭圆形" fill="#C2D6FF" cx="7.875" cy="7.875" r="7.875"></circle>
+		                                <path d="M8.4375,3.9375 L8.4375,7.3125 L11.8125,7.3125 L11.8125,8.4375 L8.4375,8.4375 L8.4375,11.8125 L7.3125,11.8125 L7.3125,8.4375 L3.9375,8.4375 L3.9375,7.3125 L7.3125,7.3125 L7.3125,3.9375 L8.4375,3.9375 Z" id="Combined-Shape" fill="#0C62FF"></path>
+		                            </g>
+		                        </g>
+		                    </g>
+		                </g>
+		            </g>
+		        </g>
+		    </g>
+		</svg>
+</div>
+</div>
+
+	<script>
+
+// 防抖
+const fc = () => {
+	console.log('出发了')
+}
+const fangdou = (fc, delay) => {
+	let timer
+	return () => {
+		  clearTimeout(timer)
+          timer = setTimeout(fc, delay)
+	}
+}
+const jieliu = (fc, delay) => {
+	let timer
+	return () => {
+		if(!timer) {
+		  fc()
+          timer = setTimeout(() => {
+          	clearTimeout(timer)
+          	timer = null
+          }, delay)
+       
+		}
+	}
+}
+let inputEl = document.getElementById("input");
+
+//const fangdou1 = fangdou(fc, 1000)
+const jieliu1 = jieliu(fc, 2000)
+inputEl.addEventListener("keyup", function (e) {
+    jieliu1(e.target.value)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+const global = {
+  api: {
+    put: "update",
+    patch: "update",
+    post: "create",
+    delete: "delete",
+  },
+  update: "Update",
+  create: "Create",
+  cancel: "Cancel",
+  back: "Back",
+  complete: "Complete",
+  success: "success",
+  fail: "fail",
+  updatedAt: "Updated At",
+};
+
+const date = {
+  dateTime: "DateTime",
+  date: "Date",
+  week: "Week",
+  month: "Month",
+  year: "Year",
+  format: {
+    week: "YYYY wo",
+  },
+  today: "Today",
+};
+
+const en = {
+  index: {
+    hello: "Hello, {{name}}.",
+    welcome: "Welcome to ",
+  },
+  locale: {
+    current: "Current locale: ",
+    zh: "Chinese",
+    "zh-CN": "Chinese",
+    "zh-HK": "Chinese",
+    "zh-TW": "Chinese",
+    en: "English",
+    "en-US": "English",
+  },
+  menus: {
+    dashboard: "Dashboard",
+    workspaces: "Workspaces",
+    create: "Create",
+  },
+  global,
+  date,
+  pages: {
+    workspaces: {
+      views: {
+        layout: {
+          default: "Default",
+          structure: "Structure",
+          board: "Board",
+          gantt: "Gantt",
+          storyMapping: "Story Mapping",
+          calendar: "calendar",
+          split: "Split",
+        },
+      },
+    },
+  },
+  views: {
+    default: {
+      menus: {
+        view: "View",
+        edit: "Edit",
+        delete: "Delete",
+        childCardCreate: "child card create",
+        childCardInlineCreate: "child card inline create",
+        moveToItemGroup: "Move to item group",
+        cloneItem: "Copy Item",
+        moveItemToWorkspace: "Move Item To Workspace",
+      },
+    },
+  },
+  ganttconfiguration: {
+    ganttConfigurationTitle: "Gantt config", // 甘特图设置
+    baseLineConfiguration: {
+      baseline: "Baseline", // 基线
+      baseLineTitleDescription:
+        "click the Baseline card to choose to show the baseline", // 点击基线卡片可选择显示基线
+      createBaseline: "Create baseline", // 创建基线
+      newBaseline: "New baseline", // 新建基线
+      editBaseline: "Edit baseline", // 编辑基线
+      baselineName: "Baseline name", // 基线名称
+      baselineDescription: "Baseline description", // 描述
+    },
+    displayItemsConfiguration: {
+      displayItems: "display items", // 显示项
+      criticalPath: "Critical path", // 关键路径
+      overdueMatters: "Overdue matters", // 逾期事项
+    },
+    timeFieldConfiguration: {
+      timeFieldConfiguration: "Time field configuration", // 时间字段配置
+      timeFieldConfigurationDescription:
+        // 为了让甘特图正确显示，您需要设置甘特图中时间区块的起止时间对应事项的哪个时间字段
+        "In order for the Gantt chart to display correctly, you need to set which time field of the matter corresponds to the start and end time of the time block in the Gantt chart",
+      relatedMatters: "Related matters", //'关联事项'
+      operation: "Operation", // 操作
+      default: "Default", // 默认
+      configuration: "Configuration", //配置
+      addConfiguration: "Add configuration", //新增配置
+      mattersType: "Matters type", // 事项类型
+      startTime: "Start time", // 开始时间
+      endTime: "End time", // 结束时间
+      percentageOfCompletion: "Percentage of completion", //完成占比
+    },
+    otherConfiguration: {
+      automaticScheduling: "Automatic scheduling", //自动编排
+      otherConfigurationDescription:
+        // 根据卡片之间的关系，自动调整卡片时间，避免出现逻辑错误
+        "Automatically adjusts card timing based on the relationship between cards to avoid logical errors",
+    },
+  },
+  errorMessage: {
+    baselineNameError: "Please enter the baseline name", // 请输入基线名称
+  },
+  placeholder: {
+    baselineNamePlaceholder:
+      "Please enter the baseline name Maximum length 32 characters", // 请输入基线名称，最大长度32个字符
+    baselineDescriptionPlaceholder: "Please enter the baseline description", // 请输入基线描述
+  },
+};
+
+export default en;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

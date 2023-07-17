@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="<%= BASE_URL + VUE_APP_ASSETS + '/' %>favicon2.ico"
+    />
+    <title>滚动条样式</title>
+    <style>
+      .container {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+      }
+      .father {
+        overflow: scroll;
+        height: 300px;
+        margin-bottom: -17px;
+        margin-right: -17px;
+      }
+
+      .vertical-scroll {
+        position: absolute;
+        right: 0;
+        width: 12px;
+        top: 0;
+        transition: all 0.3s ease-out;
+        visibility: visible;
+        background-color: #f5f5f5;
+        height: 100%;
+      }
+      .rail {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        background-color: #ccc;
+        border-radius: 1000px;
+        cursor: pointer;
+        -webkit-transition: background-color 0.3s;
+        transition: background-color 0.3s;
+      }
+      .show {
+        width: 300px;
+        height: 300px;
+        position: relative;
+        margin-left: 500px;
+        box-shadow: inset -5px 0 10px -5px red;
+        display: none;
+
+        /* box-shadow: -8px 0px 16px -4px rgb(9 25 64 / 20%),
+          0px 0px 1px 0px rgb(9 25 64 / 30%); */
+      }
+      .son {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        left: -200px;
+        top: 0;
+        border: 1px solid #ccc;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="father" id="father">
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>111</div>
+        <div>1221</div>
+        <div>1221</div>
+        <div>1221</div>
+      </div>
+      <div class="vertical-scroll">
+        <div class="rail"></div>
+      </div>
+    </div>
+    <div class="show">
+      <div class="son"></div>
+    </div>
+  </body>
+  <script>
+    const users = [
+      {
+        nickname: "osc-admin123昵称111",
+        id: "jasPZZVVEQ",
+      },
+      {
+        nickname: "456",
+        id: "11111111",
+      },
+    ];
+    const bpmn = [
+      {
+        actor: "jasPZZVVEQ",
+        result: "同意",
+        comment: null,
+        dueDate: "2022-11-8",
+      },
+      {
+        actor: "11111111",
+        result: "同意q",
+        comment: null,
+        dueDate: "2022-11-8",
+      },
+    ];
+    var isSubsequence = function (s, t) {
+      const arrayIndex = [];
+      for (let i = 0; i < s.length; i++) {
+        if (t.indexOf(s[i]) === -1) {
+          return false;
+        }
+        arrayIndex.push(t.indexOf(s[i]));
+      }
+      const arrayIndexSort = [...arrayIndex].sort();
+      console.log(arrayIndexSort, "arrayIndexSort");
+      console.log(arrayIndex, "arrayIndex");
+      if (JSON.stringify(arrayIndexSort) === JSON.stringify(arrayIndex)) {
+        return true;
+      }
+      return false;
+    };
+    const r = isSubsequence("aaaaaa", "bbaaaa");
+    console.log("r: ", r);
+  </script>
+</html>

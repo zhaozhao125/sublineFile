@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		Array.prototype.myReduce = function(fn, init) {
+           let preValue
+           let currentIndex
+           const array = this
+           if (init === undefined) {
+             preValue = array[0]
+             currentIndex = 1
+           } else {
+             preValue = init
+             currentIndex = 0
+           }
+
+           for(let i=currentIndex; i< array.length; i++) {
+             preValue = fn(preValue, array[i], i, array)
+           }
+           return preValue
+		}
+        const myArray = [1,2,3,4,5]
+        const res = myArray.myReduce((pre, cur, index, array) => {
+           return pre + cur
+        })
+        console.log(res, 'res')
+
+        const array1 = []
+        array1.length = 10
+        array1.fill(0)
+        console.log(array1, '1111')
+
+	</script>
+</body>
+</html>

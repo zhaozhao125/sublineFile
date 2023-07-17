@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // const a = {};
+      // const b = {};
+      // a.b = b;
+      // b.a = a;
+      // console.log(a, "a");
+      // console.log(JSON.stringify(a));
+      const str = "123";
+      var qian = {
+        a: 1,
+        b: { bb: { cc: 1 } },
+        m: () => {
+          console.log("123");
+        },
+        date: [new Date(1536627600000), new Date(1540047600000)],
+        c: NaN,
+        arr: {
+          shuzu: [1, 2, 3, 4],
+        },
+        func: () => {
+          console.log(123);
+        },
+      };
+      var qianCopy = { ...qian };
+
+      function deepClone(target, hash = new WeakMap()) {
+        if (hash.has(target)) {
+          return hash.get(target);
+        }
+        if (!target || typeof target !== "object") {
+          return target;
+        }
+
+        let deepObj;
+        let Constructor = target.constructor;
+        switch (Constructor) {
+          case RegExp:
+          case Date:
+            deepObj = new Constructor(target);
+            break;
+          default:
+            deepObj = new Constructor();
+        }
+        hash.set(target, deepObj);
+        for (let key in target) {
+          const keyValue = target[key];
+          if (typeof keyValue === "object") {
+            deepObj[key] = deepClone(keyValue, hash);
+          } else {
+            deepObj[key] = keyValue;
+          }
+        }
+        return deepObj;
+      }
+      // const res = deepClone(qian);
+      qianCopy.arr.shuzu[0] = 123;
+      qianCopy.a = "改变了";
+      qianCopy.b.bb = "对象改变了";
+      // console.log("res: ", res);
+      console.log("qianCopy: ", qianCopy);
+      console.log("qian: ", qian);
+    </script>
+  </body>
+</html>

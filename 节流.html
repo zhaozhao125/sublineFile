@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" oninput="myFunction()" id="input" />
+    <div id="dox">
+      <li id="1" key="1">1</li>
+      <li key="2">2</li>
+      <li key="3">3</li>
+    </div>
+    <script>
+      // const dox = document.getElementById('dox')
+      // dox.addEventListener('click', (e) => {
+      //    console.log(e, 'e')
+      // })
+      // const lists = document.getElementsByTagName('li')
+      // for(var i=0; i< lists.length; i++) {
+      //   ((i) => {
+      //     lists[i].addEventListener('click', ()=> {
+      //       console.log(i)
+      //    })
+      //   })(i)
+
+      // }
+
+      // function myFunction () {
+      //   console.log('执行1111111了')
+      //    return () => {
+      //     console.log('执行了')
+      //    }
+      // }
+      function throttle(fn, delay) {
+        let timer = null;
+        let firstFlag = true;
+        return function () {
+          const context = this;
+          if (!timer) {
+            // if (firstFlag) {
+            //   fn();
+            // }
+            fn();
+            timer = setTimeout(() => {
+              fn.apply(context, arguments);
+              firstFlag = false;
+              clearTimeout(timer);
+              timer = null;
+            }, delay);
+          }
+        };
+      }
+
+      function timeThrottle(fn, delay) {
+        let preTime = Date.now();
+        console.log("preTime: ", preTime);
+        return function () {
+          let current = Date.now();
+
+          // console.log("时间差 ", current - preTime);
+
+          if (current - preTime >= delay) {
+            fn();
+            preTime = Date.now();
+          }
+        };
+      }
+
+      function timeAndTimer(fn, delay) {
+        let pretime = Date.now();
+        let timer = null;
+        return function () {
+          let currentTime = Date.now();
+          const durTime = delay - (currentTime - pretime);
+          clearTimeout(timer);
+          if (durTime <= 0) {
+            // 执行了
+            fn();
+            pretime = currentTime;
+          } else {
+            timer = setTimeout(() => {
+              fn();
+            }, delay);
+          }
+        };
+      }
+      // const myFunction = timeAndTimer(() => {
+      //   const input = document.getElementById("input");
+      //   console.log(input.value);
+      // }, 1000);
+      const myFunction = throttle(() => {
+        const input = document.getElementById("input");
+        console.log(input.value);
+      }, 1000);
+      // const myFunction = timeThrottle(() => {
+      //   const input = document.getElementById("input");
+      //   console.log(input.value);
+      // }, 1000);
+
+      // 方式一、闭包形式
+
+      // function throttle(fn, time) {
+      //   let flag = true;
+      //   return function () {
+      //     if (!flag) {
+      //       return;
+      //     }
+      //     flag = false;
+      //     const timer = setTimeout(() => {
+      //       fn();
+      //       flag = true;
+      //       clearTimeout(timer);
+      //     }, time);
+      //   };
+      // }
+
+      // function throttle(fn, time) {
+      //   let timer = null;
+      //   return function (...args) {
+      //     if (!timer) {
+      //       timer = setTimeout(() => {
+      //         fn();
+      //         timer = null;
+      //       }, time);
+      //     }
+      //   };
+      // }
+      // myFunction = throttle(() => {
+      //   const Einput = document.getElementById('input')
+      //   console.log(Einput.value);
+      // }, 1000);
+
+      // 方式二、普通形式
+      // var flag = true;
+      // function myFunction () {
+      // 	if(!flag) {
+      //            return
+      // 	}
+      // 	flag = false
+      // 	const timer = setTimeout(() => {
+      //      console.log(123456)
+      //            flag = true
+      // 	}, 1000)
+      // }
+    </script>
+  </body>
+</html>

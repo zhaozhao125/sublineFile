@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        name: "Ken",
+        age: 18,
+        hobbit: ["dance", "sing", { type: "sports", value: "run" }],
+        schoolData: {
+          grades: "A",
+        },
+        run: function () {},
+        walk: undefined,
+        fly: NaN,
+        cy: null,
+        date: new Date(),
+      };
+      const objCopy = JSON.parse(JSON.stringify(obj));
+      console.log("objCopy: ", objCopy);
+      console.log("obj: ", obj);
+      // 不会复制值为function的key
+      // 不会复制值为undefined的key
+      // 值为NaN、无穷大，无穷小会的转换为null
+      // date对象会转为字符串
+      // 获取不到原型的属性
+
+      const FN = function () {};
+    </script>
+  </body>
+</html>
