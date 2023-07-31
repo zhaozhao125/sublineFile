@@ -8,13 +8,18 @@
   <body>
     <script>
       class Point {
-        constructor(x, y) {
-          this.x = x;
-          this.y = y;
+        // constructor(x, y) {
+        //   console.log("contructor执行");
+        //   this.x = x;
+        //   this.y = y;
+        // }
+        add() {
+          console.log(this, "this");
         }
       }
       const obj = new Point(1, 2);
-      console.log(obj);
+      console.log(obj, "obj");
+      obj.add();
       const y = Symbol("foo");
       console.log("y: ", y);
     </script>

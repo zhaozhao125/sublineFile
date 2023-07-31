@@ -22,6 +22,7 @@
 
         const app = fiber.stateNode();
         isMount = false;
+        console.log(fiber, "fiber");
         return app;
       }
 
@@ -106,11 +107,6 @@
       }
 
       window.app = schedule();
-
-      const {playload: playloadaa} = {playload: {a: 123}}
-      console.log(playloadaa, 'playloadaa')
-
-
     </script>
   </body>
 </html>

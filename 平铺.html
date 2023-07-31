@@ -47,6 +47,7 @@
           if (ele.children) {
             arr.push(ele);
             arr.push(...toFlat(ele.children));
+            delete ele.children;
           } else {
             arr.push(ele);
           }
@@ -54,7 +55,7 @@
         return arr;
       }
       const res = toFlat(data);
-      console.log("res: ", res);
+      console.log("res1111: ", res);
 
       const dataArray = [1, 2, [3, 4, 5, [6, 7, 8], 9], 10, [11, 12]];
       function toFalttion(dataArray) {

@@ -57,17 +57,19 @@
         const ret = []; // 用于存放所有的promise实例
         const executing = []; // 用于存放目前正在执行的promise
         for (const item of array) {
-          const p = Promise.resolve(iteratorFn(item)); // 防止回调函数返回的不是promise，使用Promise.resolve进行包裹
+          console.log(item, "添加");
+          const p = iteratorFn(item); // 防止回调函数返回的不是promise，使用Promise.resolve进行包裹
 
           ret.push(p);
 
           // then回调中，当这个promise状态变为fulfilled后，将其从正在执行的promise列表executing中删除
           const e = p.then(() => {
-            console.log("执行e");
+            // console.log("执行e");
             executing.splice(executing.indexOf(e), 1);
           });
-          console.log(e, "e");
+
           executing.push(e);
+          console.log(executing, "executing");
           if (executing.length >= poolLimit) {
             // 一旦正在执行的promise列表数量等于限制数，就使用Promise.race等待某一个promise状态发生变更，
             // 状态变更后，就会执行上面then的回调，将该promise从executing中删除，
@@ -75,26 +77,19 @@
             await Promise.race(executing);
           }
         }
-        console.log(ret, "ret");
         return Promise.all(ret);
       }
       const timeout = (i) => {
-        // console.log("开始", i);
         return new Promise((resolve) =>
           setTimeout(() => {
             resolve(i + "成功了");
-            // console.log("结束", i);
           }, i)
         );
       };
 
       (async () => {
-        const res = await asyncPool(
-          2,
-          [6000, 1000, 3000, 4000, 5000, 2000],
-          timeout
-        );
-        console.log(res);
+        const res = await asyncPool(2, [6000, 10000, 2000], timeout);
+        console.log(res, "res");
       })();
     </script>
   </body>
