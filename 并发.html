@@ -7,52 +7,6 @@
   </head>
   <body>
     <script>
-      // function parallelLimit(fns, limit) {
-      //   let len = fns.length;
-      //   let result = Array(len).fill(false);
-      //   let count = 0;
-
-      //   return new Promise((resolve) => {
-      //     function next(index) {
-      //       console.info("index", index, count);
-      //       if (!fns[index]) return;
-
-      //       fns[index]()
-      //         .then((res) => {
-      //           result[index] = res;
-      //         })
-      //         .catch((e) => {
-      //           result[index] = e?.message || "失败";
-      //         })
-      //         .finally(() => {
-      //           if (count < len) {
-      //             next(count++);
-      //           } else if (!result.includes(false)) {
-      //             resolve(result);
-      //           }
-      //         });
-      //     }
-
-      //     while (count < limit) {
-      //       next(count++);
-      //     }
-      //   });
-      // }
-
-      // let fns = [10, 2, 7, 4, 5, 6, 3, 8, 9, 1].map(
-      //   (index) => () =>
-      //     new Promise((resolve) =>
-      //       setTimeout(() => {
-      //         console.info(index);
-      //         resolve(index);
-      //       }, 100 * index)
-      //     )
-      // );
-
-      // console.info(fns);
-
-      // parallelLimit(fns, 2);
-
       async function asyncPool(poolLimit, array, iteratorFn) {
         const ret = []; // 用于存放所有的promise实例
         const executing = []; // 用于存放目前正在执行的promise

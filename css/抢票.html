@@ -13,37 +13,47 @@
         border-radius: 12px;
         background: #fff0f1;
         padding: 24px;
-        display: flex;
-        align-items: center;
       }
       .content-flex {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
       }
-      .qianggou {
+
+      .ellipisis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+      }
+      /* .ellipisis {
         width: 100px;
         overflow: hidden;
-        white-space: nowrap;
         text-overflow: ellipsis;
+        white-space: nowrap;
+      } */
+      .qianggou {
+        width: 100px;
+        margin-left: 20px;
+      }
+      .outer {
+        width: calc(100% - 100px);
       }
     </style>
     <div class="content">
       <div class="content-flex">
-        <div>
+        <div class="outer">
           <p>杭州市优惠券</p>
-          <p>123456</p>
+          <p class="ellipisis">
+            123456地方都是反对反对发到饭否士大夫十分稍等士大夫地方各个地方给到各个地方古典风格多个多个
+          </p>
         </div>
-        <div class="qianggou">抢购斯菲斯沙发沙发沙发沙发沙发发</div>
+        <div class="qianggou">抢购</div>
       </div>
     </div>
-    <script>
-      for (let i = 1; i < 61; i++) {
-        setTimeout(() => {
-          console.log(i);
-        }, 1000 * i);
-      }
-    </script>
+    <!-- <div class="box1"></div>
+    <div class="box2"></div> -->
+    <script></script>
   </body>
 </html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>子序列</title>
+  </head>
+  <body>
+    <input type="text" oninput="myFunction()" />
+    <script>
+      var arr = [1, 2, 5, 4];
+
+      console.log([...arr].sort());
+      console.log(arr);
+      /**
+       * @param {string} s
+       * @param {string} t
+       * @return {boolean}
+       */
+      var isSubsequence = function (s, t) {
+        const sLength = s.length;
+        const tLength = t.length;
+        let i = 0;
+        let j = 0;
+        while (i < sLength && j < tLength) {
+          if (s[i] === t[j]) {
+            i++;
+          }
+          j++;
+        }
+        return i === sLength;
+      };
+      console.log(isSubsequence("abc", "ahbgdc"));
+      let c = 1;
+      console.log(++c);
+      console.log(c);
+    </script>
+  </body>
+</html>
