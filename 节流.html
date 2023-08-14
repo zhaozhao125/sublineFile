@@ -13,25 +13,22 @@
       <li key="3">3</li>
     </div>
     <script>
-      // const dox = document.getElementById('dox')
-      // dox.addEventListener('click', (e) => {
-      //    console.log(e, 'e')
-      // })
-      // const lists = document.getElementsByTagName('li')
-      // for(var i=0; i< lists.length; i++) {
-      //   ((i) => {
-      //     lists[i].addEventListener('click', ()=> {
-      //       console.log(i)
-      //    })
-      //   })(i)
+      const dox = document.getElementById("dox");
+      dox.addEventListener("click", (e) => {
+        console.log(e, "e");
+      });
+      const lists = document.getElementsByTagName("li");
+      for (let i = 0; i < lists.length; i++) {
+        lists[i].addEventListener("click", () => {
+          console.log(i);
+        });
+      }
 
-      // }
-
-      // function myFunction () {
-      //   console.log('执行1111111了')
-      //    return () => {
-      //     console.log('执行了')
-      //    }
+      // function myFunction() {
+      //   console.log("执行1111111了");
+      //   return () => {
+      //     console.log("执行了");
+      //   };
       // }
       function throttle(fn, delay) {
         let timer = null;
@@ -90,7 +87,7 @@
       //   const input = document.getElementById("input");
       //   console.log(input.value);
       // }, 1000);
-      const myFunction = throttle(() => {
+      const myFunction = timeThrottle(() => {
         const input = document.getElementById("input");
         console.log(input.value);
       }, 1000);

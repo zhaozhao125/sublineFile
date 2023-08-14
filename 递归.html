@@ -21,21 +21,23 @@
           internals: [{ name: "Jack", salary: 1300 }],
         },
       };
-      const mySum = (company) => {
-        if (Array.isArray(company)) {
-          return company.reduce((pre, cur) => {
+
+      function sum2(obj) {
+        if (Array.isArray(obj)) {
+          return obj.reduce((pre, cur) => {
             return pre + cur.salary;
           }, 0);
         } else {
           let sum = 0;
-          for (let ele of Object.values(company)) {
-            sum += mySum(ele);
+          for (let key in obj) {
+            sum += sum2(obj[key]);
           }
           return sum;
         }
-      };
-      const total = mySum(company);
-      // console.log("total: ", total);
+      }
+
+      const total = sum2(company);
+      console.log("total: ", total);
 
       // 递归求和
       const sumRec = (n) => {

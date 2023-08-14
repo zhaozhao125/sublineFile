@@ -10,20 +10,19 @@
       async function asyncPool(poolLimit, array, iteratorFn) {
         const ret = []; // 用于存放所有的promise实例
         const executing = []; // 用于存放目前正在执行的promise
+        let index = 0;
         for (const item of array) {
-          console.log(item, "添加");
           const p = iteratorFn(item); // 防止回调函数返回的不是promise，使用Promise.resolve进行包裹
 
           ret.push(p);
 
           // then回调中，当这个promise状态变为fulfilled后，将其从正在执行的promise列表executing中删除
-          const e = p.then(() => {
-            // console.log("执行e");
+          const e = p.then((url) => {
             executing.splice(executing.indexOf(e), 1);
           });
 
           executing.push(e);
-          console.log(executing, "executing");
+
           if (executing.length >= poolLimit) {
             // 一旦正在执行的promise列表数量等于限制数，就使用Promise.race等待某一个promise状态发生变更，
             // 状态变更后，就会执行上面then的回调，将该promise从executing中删除，
@@ -33,16 +32,43 @@
         }
         return Promise.all(ret);
       }
-      const timeout = (i) => {
-        return new Promise((resolve) =>
-          setTimeout(() => {
-            resolve(i + "成功了");
-          }, i)
-        );
-      };
+      // const timeout = (i) => {
+      //   return new Promise((resolve) =>
+      //     setTimeout(() => {
+      //       console.log(i + "成功了");
+      //       resolve(i + "成功了");
+      //     }, i)
+      //   );
+      // };
+      var urls = [
+        "https://www.kkkk1000.com/images/getImgData/getImgDatadata.jpg",
+        "https://www.kkkk1000.com/images/getImgData/gray.gif",
+        "https://www.kkkk1000.com/images/getImgData/Particle.gif",
+        "https://www.kkkk1000.com/images/getImgData/arithmetic.png",
+        "https://www.kkkk1000.com/images/getImgData/arithmetic2.gif",
+        "https://www.kkkk1000.com/images/getImgData/getImgDataError.jpg",
+        "https://www.kkkk1000.com/images/getImgData/arithmetic.gif",
+        "https://www.kkkk1000.com/images/wxQrCode2.png",
+      ];
 
+      function loadImg(url) {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = function () {
+            console.log("一张图片加载完成");
+            resolve(url);
+          };
+          img.onerror = reject;
+          img.src = url;
+          document.body.appendChild(img);
+        });
+      }
+      // (async () => {
+      //   const res = await asyncPool(2, [6000, 10000, 2000], loadImg);
+      //   console.log(res, "res");
+      // })();
       (async () => {
-        const res = await asyncPool(2, [6000, 10000, 2000], timeout);
+        const res = await asyncPool(2, urls, loadImg);
         console.log(res, "res");
       })();
     </script>

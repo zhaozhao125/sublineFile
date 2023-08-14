@@ -7,7 +7,7 @@
   </head>
   <body>
     <script>
-      const a = [1, 2, 3, 4, 5, 6, 7];
+      const a = [1, 2, 3, 4, 5, 6];
       const b = [1, 2, 3, 4, 5, 6, 910];
       // 补集
       function buji(a, b) {
@@ -21,16 +21,15 @@
         return res;
       }
       const res = buji(a, b);
+      console.log("res: ", res);
       // 交集
       function isInclude(a, b) {
-        return a.every((ele, index, arr) => {
-          console.log(ele, index, arr);
+        return a.every((ele) => {
           return b.includes(ele);
         });
       }
       const res1 = isInclude(a, b);
       console.log("res1: ", res1);
-      const tihuan = a.splice(2, 0, "替换");
     </script>
   </body>
 </html>

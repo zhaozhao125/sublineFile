@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function isDui(str) {
+        const strArr = [...str];
+        let start = 0;
+        let end = strArr.length - 1;
+        while (start < end) {
+          if (strArr[start] !== strArr[end]) {
+            return false;
+          }
+          start++;
+          end--;
+        }
+        return true;
+      }
+      const res = isDui("abccba1");
+      console.log("res: ", res);
+    </script>
+  </body>
+</html>

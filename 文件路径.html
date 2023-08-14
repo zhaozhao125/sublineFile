@@ -51,7 +51,7 @@
           }
   </style>
   <body>
-    <div class="main">
+    <!-- <div class="main">
       <div class="content">
         <a class="name">a namea namea namea namea</a>
       </div>
@@ -64,7 +64,7 @@
     </div>
     <div class="test">
       <span class="name"> erithrirehtrthrethriththtre8it</span>
-    </div>
+    </div> -->
 
     <style type="text/css">
       .test {
@@ -87,25 +87,37 @@
       }
     </style>
     <script>
-      const files = ["/usr/bin", "/usr/bin/config"];
-      const arr = [];
-      let flag = true;
-      let res = [];
-      files.forEach((ele) => {
-        arr.push(ele.split("/").splice(1, ele.length));
+      const files = ["/usr/bin", "/usr/bin/config", '"/usr/bin/config'];
+      const filesInit = files.map((ele) => {
+        let eleArr = ele.split("/");
+        eleArr.splice(0, 1);
+        return eleArr;
       });
-      for (let i = 0; i < arr[0].length; i++) {
-        for (let j = 0; j < arr.length; j++) {
-          if (arr[j][i] !== arr[0][i]) {
+      console.log(filesInit, "filesInit");
+      let flag = true;
+      const res = [];
+      for (let i = 0; i < filesInit[0].length; i++) {
+        for (let j = 0; j < filesInit.length; j++) {
+          if (filesInit[j][i] !== filesInit[0][i]) {
             flag = false;
             break;
           }
         }
-        flag && res.push(arr[0][i]);
+        if (flag) {
+          res.push(filesInit[0][i]);
+        }
       }
-      console.log(arr, "arr");
       console.log(res, "res");
-      console.log(Math.pow(5, 2), "pow");
+
+      var chunk = function (arr, size) {
+        let res = [];
+        while (arr.length) {
+          res.push(arr.splice(0, size));
+        }
+        return res;
+      };
+      const res1 = chunk([1, 2, 3, 4], 1);
+      console.log("res1: ", res1);
     </script>
   </body>
 </html>

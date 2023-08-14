@@ -26,100 +26,38 @@
       { id: 33, parent_id: 3, name: "东莞市" },
       { id: 3, parent_id: 0, name: "广东省" },
     ];
-    // 方法一
-    // function toTree(data, rootId) {
-    //   let keyMap = {};
-    //   let res = [];
-    //   for (item of data) {
-    //     const { id, parent_id } = item;
-    //     if (!keyMap[id]) {
-    //       keyMap[id] = {};
-    //     }
-    //     keyMap[id] = keyMap[id].children
-    //       ? {
-    //           ...item,
-    //           children: keyMap[id].children,
-    //         }
-    //       : item;
-    //     if (parent_id === rootId) {
-    //       res.push(keyMap[id]);
-    //     } else {
-    //       if (!keyMap[parent_id]) {
-    //         keyMap[parent_id] = {};
-    //       }
-    //       if (!keyMap[parent_id].children) {
-    //         keyMap[parent_id].children = [];
-    //       }
-    //       keyMap[parent_id].children.push(keyMap[id]);
-    //     }
-    //   }
-    //   return res;
-    // }
 
-    // 方法二
-    // function toTree(data, root) {
-    //   const res = [];
-    //   // 转化为map
-    //   const mapKey = {};
-    //   for (let item of data) {
-    //     mapKey[item.id] = item;
-    //   }
-    //   for (let item of data) {
-    //     const { id, parent_id } = item;
-    //     if (parent_id === root) {
-    //       res.push(mapKey[id]);
-    //     } else {
-    //       mapKey[parent_id].children
-    //         ? mapKey[parent_id].children.push(mapKey[id])
-    //         : (mapKey[parent_id].children = [mapKey[id]]);
-    //     }
-    //   }
-    //   mapKey[2].name = "上海2";
-    //   console.log(mapKey, "mapKey");
-    //   return res;
-    // }
-
-    // 方法三
-    function toTree(data, pid) {
-      return data
-        .filter((ele) => ele.parent_id === pid)
-        .map((m) => ({ ...m, children: toTree(data, m.id) }));
+    function arrayToTree(array, parent_id = 0) {
+      const tree = [];
+      for (const item of array) {
+        if (item.parent_id === parent_id) {
+          const children = arrayToTree(array, item.id);
+          if (children.length) {
+            item.children = children;
+          }
+          tree.push(item);
+        }
+      }
+      return tree;
     }
-    const normalData = toTree(data, 0);
-    console.log("rr: ", normalData);
-    // 深度优先遍历
-    // function tree2list(tree) {
-    //   const list = [];
-    //   const queue = [...tree];
-    //   while (queue.length) {
-    //     const node = queue.shift();
-    //     console.log("node: ", node);
-    //     // const children = node.children;
-    //     const { children, ...rest } = node;
-    //     if (children) {
-    //       queue.push(...children);
-    //     }
 
-    //     list.push(rest);
-    //   }
-    //   return list;
-    // }
+    const tree = arrayToTree(data);
+    console.log(tree, "tree1");
 
     //递归
 
     function tree2list(tree) {
-      let resList = [];
-      for (let item of tree) {
-        if (item.children.length) {
-          resList.push(...tree2list(item.children));
+      let res = [];
+      for (let ele of tree) {
+        if (ele?.children?.length) {
+          res.push(...tree2list(ele.children));
         }
-        delete item.children;
-        resList.push(item);
+        delete ele.children;
+        res.push(ele);
       }
-      return resList;
+      return res;
     }
-
-    const normal = tree2list(normalData);
+    const normal = tree2list(tree);
     console.log("normal: ", normal);
   </script>
 </html>
