@@ -16,7 +16,6 @@
         console.log(this.name);
       };
       function MyNew(fn, ...args) {
-        console.log(...args, "args");
         if (typeof fn !== "function") {
           throw new Error("错误");
         }

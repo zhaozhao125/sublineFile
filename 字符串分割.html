@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let money = "1221fadfda23";
+
+      function moneyF(str) {
+        const strArr = [...str];
+        strArr.forEach((ele, index) => {
+          if ((index + 1) % 3 === 0 && index !== strArr.length - 1) {
+            strArr[index] = ele + ",";
+          }
+        });
+        return strArr.join("");
+      }
+      const res1 = moneyF(money);
+      console.log("res1: ", res1);
+    </script>
+  </body>
+</html>

@@ -1,56 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-</head>
-<body>
-  <script>
-     var arr = [2,1,5,6,2]
-     const res = arr.find((ele, index,arr) => {
-      console.log(ele,index,arr)
-      return true
-     })
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var arr = [2, 1, 5, 6, 2];
+      const res = arr.find((ele, index, arr) => {
+        console.log(ele, index, arr);
+        return true;
+      });
 
-    var flag = true;
-    var showCount;
-    const fnComp = (count) => {
-      console.log(count, 'count')
-      console.log(flag, 'flag')
-      if(flag) {
-        console.log(11111)
-        flag = false;
-        showCount = () => {
-          console.log('count', count);
-        };
+      var flag = true;
+      var showCount;
+      const fnComp = (count) => {
+        console.log(count, "count");
+        console.log(flag, "flag");
+        if (flag) {
+          console.log(11111);
+          flag = false;
+          showCount = () => {
+            console.log("count", count);
+          };
+        }
+        showCount && showCount();
       };
-      showCount && showCount();
-    };
-    fnComp(0); // 初始化
-    fnComp(1);
-    fnComp(2);
+      fnComp(0); // 初始化
+      fnComp(1);
+      fnComp(2);
 
+      console.log(1);
 
-    console.log(1);
+      setTimeout(() => {
+        console.log(2);
+      }, 0);
 
-    setTimeout(() => {
-      console.log(2);
-    },0);
+      let a = new Promise((resolve) => {
+        console.log(3);
+        resolve();
+      })
+        .then(() => {
+          console.log(4);
+        })
+        .then(() => {
+          console.log(5);
+        });
 
-    let a = new Promise((resolve) => {
-      console.log(3);
-      resolve();
-    }).then(() => {
-      console.log(4);
-    }).then(() => {
-      console.log(5);
-    });
-
-    console.log(6);
-
-
-  </script>
-</body>
+      console.log(6);
+    </script>
+  </body>
 </html>

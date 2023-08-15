@@ -15,23 +15,20 @@
       // console.log(JSON.stringify(a));
 
       var qian = {
-        // a: 1,
-        // b: { bb: { cc: 1 } },
-        // m: () => {
-        //   console.log("123");
-        // },
+        a: 1,
+        b: { bb: { cc: 1 } },
+        m: () => {
+          console.log("123");
+        },
         date: new Date(1536627600000),
         // c: NaN,
-        // arr: {
-        //   shuzu: [{ a: 1 }, 2, 3, 4],
-        // },
+        arr: {
+          shuzu: [{ a: 1 }, 2, 3, 4],
+        },
       };
       // qian.children = qian;
-      var qianCopy = { ...qian };
 
       function deepClone(target, hash = new WeakMap()) {
-        // console.log(hash, "hash");
-        console.log(target, target.constructor, "target");
         if (hash.has(target)) {
           return hash.get(target);
         }
@@ -41,8 +38,6 @@
 
         let deepObj;
         let Constructor = target.constructor;
-        // console.log(typeof target, target);
-        // console.log("Constructor: ", Constructor);
         switch (Constructor) {
           case RegExp:
           case Date:
@@ -53,10 +48,7 @@
         }
         hash.set(target, deepObj);
         for (let key in target) {
-          // console.log(key, "key");
           const keyValue = target[key];
-          // console.log("keyValue: ", keyValue);
-
           if (typeof keyValue === "object") {
             deepObj[key] = deepClone(keyValue, hash);
           } else {
@@ -66,59 +58,8 @@
         return deepObj;
       }
       const res = deepClone(qian);
-      // qian.arr.shuzu[0].a = "5555555555";
       console.log("res: ", res);
       console.log("qian: ", qian);
-      // constructor
-      // const constructorString = "1111";
-      // const constructorNumber = 1111;
-      // const constructorFuc = () => {};
-      // const constructorObj = { a: 11 };
-      // console.log(constructorString.constructor === String);
-      // console.log(constructorNumber.constructor === Number);
-      // console.log(constructorFuc.constructor === Function);
-      // console.log(constructorObj.constructor === Object);
-
-      function deepCopy2(data, hash = new WeakMap()) {
-        if (typeof data !== "object" || data === null) {
-          return data;
-        }
-        // 判断传入的待拷贝对象的引用是否存在于hash中
-        if (hash.has(data)) {
-          return hash.get(data);
-        }
-        let newData = {};
-        const dataKeys = Object.keys(data);
-        dataKeys.forEach((value) => {
-          const currentDataValue = data[value];
-          // 基本数据类型的值和函数直接赋值拷贝
-          if (
-            typeof currentDataValue !== "object" ||
-            currentDataValue === null
-          ) {
-            newData[value] = currentDataValue;
-          } else if (Array.isArray(currentDataValue)) {
-            // 实现数组的深拷贝
-            newData[value] = [...currentDataValue];
-          } else if (currentDataValue instanceof Set) {
-            // 实现set数据的深拷贝
-            newData[value] = new Set([...currentDataValue]);
-          } else if (currentDataValue instanceof Map) {
-            // 实现map数据的深拷贝
-            newData[value] = new Map([...currentDataValue]);
-          } else {
-            // 将这个待拷贝对象的引用存于hash中
-            hash.set(data, data);
-            // 普通对象则递归赋值
-            newData[value] = deepCopy2(currentDataValue, hash);
-          }
-        });
-        return newData;
-      }
-
-      // const res2 = deepCopy2(qian);
-      // qian.arr.shuzu[0].a = "44444444";
-      // console.log(res2, "res2");
     </script>
   </body>
 </html>

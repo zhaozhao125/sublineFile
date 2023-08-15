@@ -10,8 +10,8 @@
       function printNumber(to, from) {
         let count = to;
         function fn() {
-          console.log(count);
-          if (count < 5) {
+          console.log(count, "count");
+          if (count < from) {
             const timer = setTimeout(() => {
               clearTimeout(timer);
               count++;
@@ -21,7 +21,7 @@
         }
         fn();
       }
-      // printNumber(1, 5);
+      printNumber(1, 5);
     </script>
   </body>
 </html>

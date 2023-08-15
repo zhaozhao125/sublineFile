@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // g10G
+      function convert(str) {
+        const strArr = [...str];
+        const strInit = strArr.map((ele) => {
+          if (isNaN(Number(ele))) {
+            let code = ele.charCodeAt(ele) + 4;
+            return String.fromCharCode(code);
+          } else {
+            return ele;
+          }
+        });
+        return strInit.join("");
+      }
+
+      console.log(convert("c10C"), "111");
+      console.log(String.fromCharCode(97));
+    </script>
+  </body>
+</html>
