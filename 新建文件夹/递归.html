@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span>0.3000 0000 0000 0000 4</span>
+    <script>
+        const jie = (n) => {
+           if (n === 1) {
+              return 1
+           } else {
+            return n * jie(n - 1)
+           }
+        }
+        const jieres = jie(5)
+        // console.log('jieres: ', jieres);
+        // 斐波那契
+        // 1 1 2 3 5 8 13
+        const fib = (n) => {
+           if (n ==1 || n==2) {
+             return 1
+           } else {
+            return fib(n-1) + fib(n-2)
+           }
+        }
+        const fibRes = fib(7)
+        console.log('fibRes: ', fibRes);
+        // 打印链表
+        let list = {
+            value: 1,
+            next: {
+                value: 2,
+                next: {
+                    value: 3,
+                    next: {
+                        value: 4,
+                        next: null
+                    }
+                }
+            }
+         };
+
+        const printList = (list) => {
+           if (list.value) {
+             console.log(list.value)
+           }
+           if (list.next) {
+            printList(list.next)
+           }
+
+        }
+        // printList(list)
+        
+        const printListWhile = (list) => {
+            while (list) {
+              console.log(list.value)
+              list = list.next
+            }
+        }
+        // printListWhile(list)
+        console.log(list, 'list111')
+        // 反向链表输出
+        const printListReverse = (list) => {
+           if (list.next) {
+            printListReverse(list.next)
+           }
+           console.log(list.value)
+        }
+        printListReverse(list)
+
+        function aa () {
+          return
+        }
+        function bb () {
+            console.log(222)
+            aa()
+            console.log(333)
+        }
+        bb()
+
+        const object1 = {a:1}
+        const object2 = {a:1}
+        const object3 = object2
+        console.log(object1 == object2, '111')
+        console.log(object2 === object3, '22')
+        console.log(Object.is(object1,object2 ))
+    </script>
+</body>
+</html>

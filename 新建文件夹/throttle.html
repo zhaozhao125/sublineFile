@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input">
+    <script>
+        function throttle (fn) {
+            var timer
+            return function () {
+                
+                if(timer) {
+                  return
+                }
+             
+               if(!timer) {
+                  fn()
+                   timer = setTimeout(() => {
+                    
+                     clearTimeout(timer)
+                     timer = null
+                   },1000)
+
+
+               }
+            }
+
+ 
+
+        };
+        function callback() {
+          console.log(11111111);
+        }
+        const input1 = document.getElementById('input')
+        input1.addEventListener('keyup', throttle(callback))
+    </script>
+
+</body>
+</html>

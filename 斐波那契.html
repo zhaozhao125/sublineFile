@@ -74,16 +74,16 @@
         for (var i = 2; i <= n; i++) {
           array[i] = array[i - 1] + array[i - 2];
         }
+        console.log(array, 'array')
         return array[n];
       }
       const res = fibDp(6);
       console.log("res: ", res);
-
       function findIndex(num) {
         let pre = 0;
         let cur = 1;
         let sum = 0;
-        let index = 0;
+        let index = 1;
         while (sum < num) {
           let temp = cur;
           sum = pre + cur;
@@ -91,13 +91,9 @@
           cur = sum;
           index++;
         }
-        if (sum === num) {
-          return index;
-        } else {
-          return -1;
-        }
+        return sum === num ? index : -1
       }
-      const index = findIndex(8);
+      const index = findIndex(2);
       console.log("index: ", index);
     </script>
   </body>

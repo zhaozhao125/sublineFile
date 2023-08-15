@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // const str = '[[[2],5,6,7],6,7,3]'
+        // const strArray = JSON.parse(str)
+        // const strstring = strArray.toString()
+        // console.log('strstring: ', strstring);
+        
+        let arr = [[[2],5,6,7],6,7,3]
+        arr = arr.toString()
+        console.log('arr: ', arr);
+        arr = arr.split(',')
+        console.log('arr1: ', arr);
+        arr = arr.map(ele => {
+            
+            return Number(ele)
+        })
+        console.log('arr2: ', arr);
+        console.log([...new Set(arr)])
+        // 转为平铺
+        // let init = []
+        // function arrInit(arr) {
+        //    for(let e of arr) {
+        //      if (typeof e === 'object') {
+        //         arrInit(e)
+        //      } else {
+        //         init.push(e)
+        //      }
+        //    }
+        // }
+        // arrInit(arr)
+        // console.log(init)
+    </script>
+</body>
+</html>

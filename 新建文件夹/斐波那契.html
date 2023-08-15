@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 求第n相
+        function fib(n) {
+          let arr = [1, 1]
+          for (i = 2; i < 5; i++) {
+            arr[i] = arr[i - 1] + arr[i - 2]
+          }
+        
+          return arr
+        }
+        const res = fib(5)
+
+    
+        // 求index
+        // [1,1,2,3,5]
+        function finIndex(total) {
+          let index = 1
+          let a = 1
+          let b = 1
+          let sum = 0
+          while(sum < total) {
+            sum = a + b;
+            a = b;
+            b = sum;
+            index++
+          }
+          return sum === total ? index: -1
+        }
+        const findIndexRes = finIndex(5)
+        console.log('findIndexRes: ', findIndexRes);
+    </script>
+</body>
+</html>

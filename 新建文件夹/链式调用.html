@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Lian {
+            constructor () {
+              this.value = 0
+            }
+            add(val) {
+              this.value = val + this.value
+              return this
+            }
+            minus(val) {
+                this.value = this.value - val
+              return this
+            }
+            getRes() {
+                return this.value
+            }
+        }
+        const obj = new Lian()
+        const res = obj.add(4).minus(1).getRes()
+        console.log('res: ', res);
+    </script>
+</body>
+</html>

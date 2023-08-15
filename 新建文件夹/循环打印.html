@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //     // 自动调用
+    //     function loopStr(str) {
+    //        const strArr = [...str]
+    //        let conutTime = 0
+    //        for (let i = 0; i < strArr.length; i++) {
+    //           conutTime++
+    //           setTimeout(() => {
+    //             console.log(strArr[i])
+    //             if (i === 2) {
+    //                 loopStr(str)
+    //             }
+    //           }, 1000 * conutTime)
+    //        }
+ 
+    //       }
+    //     // loopStr('bar')
+    //     // 手动调用
+    // function loopStrHandle(str) {
+    //    const strArr = [...str]
+    //    let i = 0
+    //    return () => {
+    //      if (i == 3) {
+    //        i = 0
+    //      }
+    //      console.log(str[i])
+    //      i ++ 
+    //      return this
+    //    }
+    // }
+    // const fc = loopStrHandle('bar')
+    // fc()
+    // fc()
+    // fc()
+    // fc()
+
+
+
+    function loopStr (str) {
+       const strArr = [...str]
+       
+       function loop() {
+        let count = 0
+         for (let i=0; i<strArr.length; i++) {
+           count++
+           setTimeout(() => {
+              console.log(strArr[i])
+              
+              
+              if (i == strArr.length -1) {
+                loop()
+              }
+           }, count *1000)
+         }
+       }
+       loop()
+    }
+    loopStr('he')
+    </script>
+</body>
+</html>

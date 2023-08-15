@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  .div {
+    flex: 1 1 auto;
+  }
+</style>
+<body>
+  <div style="height: 100px;width: 100px;float: left;background: lightblue">我是一个左浮动的元素</div>
+ <div style="height: 200px;background: #eee; display: flex;">
+   <div class="div">我是一个没有设置浮动, 
+    也没有</div>
+    <div class="div">我是一个没有设置浮动, sdfsdfdsfsdffssdfdfffs
+      也没有触发 BFC 元素</div>
+</div>
+    <script>
+        let str = 'abbcdde'
+
+        function filterStr (str) {
+          let strMap = {}
+          for (let s of str) {
+             if (!strMap[s]) {
+                strMap[s] = 1
+             } else {
+                strMap[s]++
+             }
+          }
+          let min = 1
+          for (let key in strMap) {
+            min = Math.min(min, strMap[key])
+          }
+          console.log(min)
+          console.log(strMap)
+          for (let key in strMap) {
+            if (strMap[key] === min) {
+            //   str.replace(new RegExp(key,'g'), '')
+              let reg = new RegExp(key,"g")
+             str.replace(reg, "")
+            }
+          }
+          return str
+        }
+        const res = filterStr(str)
+        console.log(res, 'res')
+
+    </script>
+</body>
+</html>
