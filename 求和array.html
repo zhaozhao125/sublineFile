@@ -37,23 +37,6 @@
 
       let money = "1221fadfda23";
 
-      // function moneyFormat(money) {
-      //   // todo
-      //   let sArr = money.split("");
-      //   console.log("sArr: ", sArr);
-      //   let n = 0,
-      //     len = sArr.length;
-      //   sArr.forEach((item, index, arr) => {
-      //     if (index == (len % 3) + 3 * n) {
-      //       arr.splice(index + n, 0, ",");
-      //       n++;
-      //     }
-      //   });
-      //   if (len % 3 === 0) {
-      //     sArr.shift();
-      //   }
-      //   return sArr.join("");
-      // }
       function moneyFormat(money) {
         const moneyArray = [...money];
         moneyArray.forEach((ele, index) => {
