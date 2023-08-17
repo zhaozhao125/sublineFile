@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 用法如下:
+      function fn1(x) {
+        return x + 1;
+      }
+      function fn2(x) {
+        return x + 2;
+      }
+      function fn3(x) {
+        return x + 3;
+      }
+      function fn4(x) {
+        return x + 4;
+      }
+      function compose(...args) {
+        return function (v) {
+          let cur = v;
+          console.log(args);
+          for (let i = 0; i < args.length; i++) {
+            cur = args[i](cur);
+          }
+          return cur;
+        };
+      }
+      const a = compose(fn1, fn2, fn3, fn4);
+      const res = a(1);
+      console.log("res: ", res);
+    </script>
+  </body>
+</html>
