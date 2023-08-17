@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <script>
-      function my(name, age) {
-        console.log(this, "this");
-        this.name = name;
-        this.age = age;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function my(name, age) {
+      console.log(this, "this");
+      this.name = name;
+      this.age = age;
+    }
+    my.prototype.say = function () {
+      console.log(this.name);
+    };
+    function MyNew(fn, ...args) {
+      if (typeof fn !== "function") {
+        throw new Error("错误");
       }
-      my.prototype.say = function () {
-        console.log(this.name);
-      };
-      function MyNew(fn, ...args) {
-        if (typeof fn !== "function") {
-          throw new Error("错误");
-        }
-        const obj = Object.create(fn.prototype);
-        fn.call(obj, ...args);
-        return obj;
+      const obj = Object.create(fn.prototype);
+      const res = fn.call(obj, ...args);
+      if (res) {
+        return res
       }
-      const res = MyNew(my, "zhao", "111");
-      console.log("res: ", res);
-      res.say();
-    </script>
-  </body>
+      return obj;
+    }
+    const res = MyNew(my, "zhao", "111");
+    console.log("res: ", res);
+    res.say();
+  </script>
+</body>
+
 </html>
