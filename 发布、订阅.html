@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+    class EventEmmiter {
+      constructor() {
+        this.events = {}
+      }
+      on(type, cb) {
+        if (!this.events[type]) {
+          this.events[type] = [cb]
+        } else {
+          this.events[type].push(cb)
+        }
+      }
+      emit(type, ...args) {
+        this.events[type].forEach((ele) => {
+          ele.apply(this, args)
+        })
+      }
+      off(type, cb) {
+        if (!this.events[type]) {
+          return
+        }
+        this.events[type] = this.events[type].filter((ele) => {
+          ele !== cb
+        })
+      }
+      once(type, cb) {
+        function fn() {
+          cb()
+          console.log(this, 'thids')
+          this.off(type, cb)
+        }
+        this.on(type, fn)
+      }
+    }
+
+
+
+    // 使用如下
+    const event = new EventEmmiter();
+
+    const handle = (...rest) => {
+      console.log(rest);
+    };
+    const handle2 = (...rest) => {
+      console.log('handle2')
+    };
+    event.on("click", handle);
+    event.on("click", handle2);
+
+    event.emit("click", 1, 2, 3, 4);
+
+    // event.off("click", handle);
+
+    // event.emit("click", 1, 2);
+
+    // event.once("dbClick", () => {
+    //   console.log(123456);
+    // });
+    // event.emit("dbClick");
+    // event.emit("dbClick");
+
+
+
+  </script>
+</body>
+
+</html>

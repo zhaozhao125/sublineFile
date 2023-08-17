@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 原型链继承
+        //原型链方案存在的缺点：多个实例对引用类型的操作会被篡改
+        function Parent(name) {
+            this.p = name
+        }
+        Parent.prototype.say = function () {
+            console.log(this.p)
+        }
+        function Son() {
+
+        }
+        Son.prototype = new Parent('parent')
+        const son1 = new Son()
+        const son2 = new Son()
+        console.log(son1.p, 'son1')
+        son2.p = 'son'
+        console.log(son1.p, 'son2')
+        son1.say()
+        // 混合继承
+        function Parent1(name) {
+            this.p = name
+        }
+        function Son1(name, age) {
+            Parent1.call(this, name)
+            this.age = age
+        }
+        Son1.prototype = new Parent()
+        Son1.prototype.constructor = Son1
+
+        const sonTwo = new Son1('zhao', 20)
+        console.log('sonTwo: ', sonTwo);
+        // es6 extends继承
+
+        class A {
+            constructor(height, width) {
+                this.height = height;
+                this.width = width;
+            }
+            say() {
+                console.log(this.height)
+            }
+
+        }
+        class B extends A {
+            constructor(length) {
+                super(length);
+
+                // 如果子类中存在构造函数，则需要在使用“this”之前首先调用 super()。
+                this.name = 'Square';
+            }
+
+
+        }
+        const b = new B(10)
+        console.log('b: ', b);
+        b.say()
+    </script>
+</body>
+
+</html>
