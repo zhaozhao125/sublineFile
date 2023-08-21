@@ -9,10 +9,11 @@
     <script>
       function printNumber(to, from) {
         let count = to;
+        let timer = null;
         function fn() {
           console.log(count, "count");
           if (count < from) {
-            const timer = setTimeout(() => {
+            timer = setTimeout(() => {
               clearTimeout(timer);
               count++;
               fn();
@@ -20,8 +21,34 @@
           }
         }
         fn();
+        return () => {
+          clearTimeout(timer);
+        };
       }
-      printNumber(1, 5);
+      // const clear = printNumber(1, 5);
+
+      function myTimer(to, from) {
+        let timer = null;
+        let count = to;
+        function fn() {
+          console.log(count, "执行");
+          if (count < from) {
+            count++;
+            timer = setTimeout(() => {
+              clearTimeout(timer);
+              fn();
+            }, 1000);
+          }
+        }
+        fn();
+        return () => {
+          clearTimeout(timer);
+        };
+      }
+      const clear = myTimer(1, 5);
+      setTimeout(() => {
+        clear();
+      }, 2000);
     </script>
   </body>
 </html>

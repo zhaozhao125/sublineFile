@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function A() {
+        this.name = "zhao";
+      }
+      A.prototype.say = () => {
+        conole.log("say");
+      };
+      const a = new A();
+      const b = "";
+      console.log("a: ", a);
+      console.log("a: ", a.__proto__);
+      console.log("a: ", a instanceof A);
+      console.log("a: ", A.prototype === a.__proto__);
+      // function myInstanceof (L, R) {
+      //    const
+      // }
+
+      function myInstanceof(L, R) {
+        const rPrototype = R.prototype;
+        L = Object.getPrototypeOf(L);
+        while (true) {
+          if (L === null) {
+            return false;
+          }
+          if (L === rPrototype) {
+            return true;
+          }
+          L = Object.getPrototypeOf(L);
+        }
+      }
+      const res = myInstanceof(a, A);
+      console.log("res: ", res);
+    </script>
+  </body>
+</html>
