@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var lengthOfLongestSubstring = function (s) {
+            var obj = {}
+            var sArr = [...s]
+            for (var i = 0; i < sArr.length; i++) {
+
+                obj[sArr[i] + i] = [sArr[i]]
+
+
+                console.log(obj)
+                for (var j = i + 1; j < sArr.length; j++) {
+                    if (obj[sArr[i] + i].indexOf(sArr[j]) == -1) {
+                        obj[sArr[i] + i].push(sArr[j])
+                    } else {
+                        break
+                    }
+                }
+            }
+            // console.log(obj)
+            let len = 1
+            Object.keys(obj).forEach((key) => {
+                if (obj[key].length >= len) {
+                    len = obj[key].length
+                }
+            })
+            return len
+        };
+        var res1 = lengthOfLongestSubstring("umvejcuuk")
+        console.log(res1)
+    </script>
+</body>
+
+</html>

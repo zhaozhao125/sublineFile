@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // {
+        //  'a.b': 1,
+        //  'a.c': 2,
+        //  'a.d.e': 5,
+        //  'b[0]': 1,
+        //  'b[1]': 3,
+        //  'b[2].a': 2,
+        //  'b[2].b': 3
+        //   c: 3
+        // }
+        const obj = {
+            a: {
+                b: 1,
+                c: 2,
+                d: { e: 5 }
+            },
+            b: [1, 3, { a: 2, b: 3 }],
+            c: 3
+        }
+
+        function faltten(obj) {
+            let objInit = {}
+            function fn(cur, pre) {
+                if (typeof cur === 'object') {
+                    if (Array.isArray(cur)) {
+                        cur.forEach((ele, index) => {
+                            fn(ele, `${pre}[${index}] `)
+                        })
+                    } else {
+                        for (let key in cur) {
+                            fn(cur[key], `${pre}${pre ? '.' : ''}${key} `)
+                        }
+                    }
+
+
+                } else {
+                    objInit[pre] = cur
+                }
+
+            }
+            fn(obj, '')
+            return objInit
+
+        }
+        const res = faltten(obj)
+        console.log('res: ', res);
+    </script>
+</body>
+
+</html>
