@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        let obj = {
-            a: 1,
-            b: {
-                c: 2,
-                d: {
-                    e: 3
-                }
-            }
+      let obj = {
+        a: 1,
+        b: {
+          c: 2,
+          d: {
+            e: 3,
+          },
+        },
+      };
+      let init = {};
+      function transObj(obj) {
+        for (let key in obj) {
+          if (typeof obj[key] === "object") {
+            transObj(obj[key]);
+          } else {
+            init[key] = obj[key];
+          }
         }
-        let init = {}
-        function transObj (obj) {
-            for (let key in obj) {
-              if (typeof obj[key] === 'object') {
-                  transObj(obj[key])
-                } else {
-                   init[key] = obj[key]
-                }
-            }
-           
-        }
-        transObj(obj)
-        console.log(init, 'init')
+      }
+      transObj(obj);
+      console.log(init, "init");
     </script>
-</body>
+  </body>
 </html>
