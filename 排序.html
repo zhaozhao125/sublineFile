@@ -31,6 +31,8 @@
       // const res = quickSort(arr);
       // console.log(res, "res");
       // 冒泡排序
+      // var arr = [11, 6, 4, 12, 8, 5, 10];
+
       function maopao(arr) {
         for (let i = 0; i < arr.length; i++) {
           for (j = i + 1; j < arr.length; j++) {
@@ -39,12 +41,13 @@
               arr[j] = arr[i];
               arr[i] = temp;
             }
+            console.log(arr);
           }
         }
         return arr;
       }
       const aa = maopao(arr);
-      console.log("aa: ", aa);
+      console.log("aa111: ", aa);
     </script>
   </body>
 </html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function currying(fn, ...args) {
+        const length = fn.length;
+        let allArgs = [...args];
+        const res = (...newArgs) => {
+          console.log(newArgs, "newArgs");
+          allArgs = [...allArgs, ...newArgs];
+          console.log("allArgs: ", allArgs);
+          if (allArgs.length === length) {
+            return fn(...allArgs);
+          } else {
+            return res;
+          }
+        };
+        return res;
+      }
+      // 用法如下：
+      const add = (a, b, c, d) => a + b + c + d;
+      const a = currying(add, 1);
+      const b = a(2);
+      const c = a(3);
+      const d = a(5);
+      console.log("d: ", d);
+      console.log(a(2, 3, 1));
+    </script>
+  </body>
+</html>

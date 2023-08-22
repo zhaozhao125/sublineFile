@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const arr = ["0.1.1", "2.3.3", "0.302.1", "4.2", "4.3.5", "4.3.4.5"];
+      arr.sort((a, b) => {
+        let i = 0;
+        const arr1 = a.split(".");
+        console.log("arr1: ", arr1);
+        const arr2 = b.split(".");
+        console.log("arr2: ", arr2);
+
+        while (true) {
+          const s1 = arr1[i];
+          const s2 = arr2[i];
+          i++;
+          if (s1 === undefined || s2 === undefined) {
+            return arr2.length - arr1.length;
+          }
+
+          if (s1 === s2) continue;
+
+          return s2 - s1;
+        }
+      });
+      console.log(arr);
+
+      //                 100 'a'
+      // 版本排序.html:36 40 'b'
+      // 版本排序.html:35 1 'a'
+      // 版本排序.html:36 100 'b'
+      // 版本排序.html:35 1 'a'
+      // 版本排序.html:36 100 'b'
+      // 版本排序.html:35 1 'a'
+      // 版本排序.html:36 40 'b'
+      // 版本排序.html:35 5 'a'
+      // 版本排序.html:36 40 'b'
+      // 版本排序.html:35 5 'a'
+      // 版本排序.html:36 1 'b'
+
+      var points = [40, 100, 1, 5];
+      points.sort(function (a, b) {
+        console.log(a, "a");
+        console.log(b, "b");
+        return a - b;
+      });
+    </script>
+  </body>
+</html>

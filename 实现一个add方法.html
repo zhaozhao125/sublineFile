@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function add(...arg) {
+        console.log(arg, "arg");
+        let allArgs = arg;
+        const fn = (...newArgs) => {
+          allArgs = [...allArgs, ...newArgs];
+          if (newArgs.length) {
+            return fn;
+          } else {
+            return allArgs.reduce((pre, cur) => {
+              return pre + cur;
+            }, 0);
+          }
+        };
+        return fn;
+      }
+
+      const res = add(1)(2)(3)(4)();
+      console.log("res: ", res);
+    </script>
+  </body>
+</html>
