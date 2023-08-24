@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <script>
 
-      function bar (str) {
-         let strArr = [...str]
-         let index = 0
-         return () => {
-          if(index === strArr.length) {
-            index = 0
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    function barFn(str) {
+      let strArr = [...str]
+      let index = 0
+      return () => {
+        if (index === strArr.length) {
+          index = 0
+        }
+        const res = strArr[index]
+        index++
+        return res
+      }
+    }
+    const bar = barFn('abcd')
+    console.log(bar(), bar(), bar(), bar(), bar(), bar(), bar(), bar());
+
+
+
+
+    function loopFn(str) {
+      const strArr = [...str]
+      let count = 0
+      for (let i = 0; i < strArr.length; i++) {
+        count++
+        let timer = setTimeout(() => {
+          console.log(strArr[i])
+          if (i === strArr.length - 1) {
+            clearTimeout(timer)
+            loopFn(str)
           }
-          const res =  strArr[index]
-          index++
-          return res
-         }
+        }, count * 1000)
       }
-      console.log(bar(), bar(), bar(), bar(), bar(), bar(), bar(), bar());
-
-
-
-
-      function loopFn(str) {
-         const strArr = [...str]
-         let count = 0
-         for (let i = 0; i< strArr.length; i++) {
-            count++
-            let timer = setTimeout(() => {
-              console.log(strArr[i])
-              if (i === strArr.length - 1) {
-                clearTimeout(timer)
-                loopFn(str)
-              }
-            }, count*1000)
-         }
-      }
+    }
       // loopFn('abcd')
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>

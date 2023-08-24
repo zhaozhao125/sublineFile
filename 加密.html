@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <!-- 尝试编写一个加密程序，加密方法将明文的字母变成其后的第4个字母，字母表首尾相连。非字母符号
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 尝试编写一个加密程序，加密方法将明文的字母变成其后的第4个字母，字母表首尾相连。非字母符号
     不加密例如输入"China"输出密文"GImre"输入"ab123"输出"ef123"输入"a*#c"输出"e*#g' -->
-    <!-- 
+  <!-- 
     高度136px宽度4 0px 图角12px 背景色#FFFOF1左边距30px右边距24px，上下居中标题
     24px粗体副标题22px 常规按钮宽度108px高度45px 圆角8px 字体20px 粗体背色#F00 -->
 
-    <script>
-      const str = "a*#c";
-      const strArray = [...str];
-      const res = strArray.map((ele) => {
-        console.log(ele.charCodeAt(0), ele);
-        if (
-          (97 <= ele.charCodeAt(0) && ele.charCodeAt(0) <= 122) ||
-          (65 <= ele.charCodeAt(0) && ele.charCodeAt(0) <= 90)
-        ) {
-          return String.fromCharCode(ele.charCodeAt(0) + 4);
-        } else {
-          return ele;
-        }
-      });
-      console.log(res.join(""), "res");
-      console.log("1".charCodeAt(0), "值");
-      console.log(String.fromCharCode(97), "a111");
-    </script>
-  </body>
+  <script>
+    const str = "a*#c";
+    const strArray = [...str];
+    const res = strArray.map((ele) => {
+      console.log(ele.charCodeAt(), ele, '2222222222');
+      if (
+        (97 <= ele.charCodeAt() && ele.charCodeAt() <= 122) ||
+        (65 <= ele.charCodeAt() && ele.charCodeAt() <= 90)
+      ) {
+        return String.fromCharCode(ele.charCodeAt() + 4);
+      } else {
+        return ele;
+      }
+    });
+    console.log(res.join(""), "res");
+    console.log("1".charCodeAt(0), "值");
+    console.log(String.fromCharCode(97), "a111");
+    console.log('a'.charCodeAt(), '1111111111')
+  </script>
+</body>
+
 </html>

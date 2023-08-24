@@ -1,98 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <input type="text" oninput="myFunction()" id="input" />
-    <script>
-      // 防抖
-      function debounce(fn, delay) {
-        let timer = null;
-        return function () {
-          if (timer) {
-            clearTimeout(timer);
-          }
-          timer = setTimeout(fn, delay);
-        };
-      }
 
-      // const myFunction = debounce(() => {
-      //   const input = document.getElementById("input");
-      //   console.log(input.value);
-      // }, 1000);
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
 
-      // 节流
-      function throttle(fn, delay) {
-        let pretime = Date.now();
-        let timer = null;
-        return function () {
-          let currentTime = Date.now();
-          const durTime = (currentTime - pretime) - delay
-          console.log('durTime: ', durTime);
+<body>
+  <input type="text" oninput="myFunction()" id="input" />
+  <script>
+    // 防抖
+    function debounce(fn, delay) {
+      let timer = null;
+      return function () {
+        if (timer) {
           clearTimeout(timer);
-          if (durTime >= 0) {
-            // 执行了
-            fn();
-            pretime = currentTime;
-          } else {
-            timer = setTimeout(() => {
-              fn();
-            }, delay);
-          }
-        };
-      }
-      const myFunction = timeAndTimer(() => {
-        const input = document.getElementById("input");
-        console.log(input.value);
-      }, 1000);
-
-      /**
-       * @param {Object} obj
-       * @return {Object}
-       */
-
-      var join = function (arr1, arr2) {
-        arr2.forEach((ele, index) => {
-          const filterObj = arr1.find((e) => ele.id === e.id);
-          if (filterObj) {
-            const findIndex = arr1.findIndex((ele) => ele.id === filterObj.id);
-            arr1[findIndex] = arr2[index];
-          } else {
-            arr1.push(ele);
-          }
-        });
-        return arr1;
-      };
-      const res = join(
-        [
-          { id: 1, x: 2, y: 3 },
-          { id: 2, x: 3, y: 6 },
-        ],
-        [
-          { id: 2, x: 10, y: 20 },
-          { id: 3, x: 0, y: 0 },
-        ]
-      );
-      console.log("res: ", res);
-
-      var sortBy = function (arr, fn) {
-        for (let i = 0; i < arr.length; i++) {
-          for (j = i + 1; j < arr.length; j++) {
-            if (fn(arr[j]) < fn(arr[i])) {
-              let temp = arr[j];
-              arr[j] = arr[i];
-              arr[i] = temp;
-            }
-          }
         }
-        return arr;
+        timer = setTimeout(fn, delay);
       };
-      const res1 = sortBy([5, 4, 1, 2, 3], (x) => x);
-      console.log("res1: ", res1);
-    </script>
-  </body>
+    }
+
+    // const myFunction = debounce(() => {
+    //   const input = document.getElementById("input");
+    //   console.log(input.value);
+    // }, 1000);
+
+    // 节流
+    function throttle(fn, delay) {
+      let pretime = Date.now();
+      let timer = null;
+      return function () {
+        let currentTime = Date.now();
+        const durTime = (currentTime - pretime) - delay
+        console.log('durTime: ', durTime);
+        clearTimeout(timer);
+        if (durTime >= 0) {
+          // 执行了
+          fn();
+          pretime = currentTime;
+        } else {
+          timer = setTimeout(() => {
+            fn();
+          }, delay);
+        }
+      };
+    }
+
+    function mythrottle(fn, delay) {
+      let timer
+      return function () {
+        const context = this
+        const args = arguments
+        if (timer) {
+          return
+        }
+
+        timer = setTimeout(() => {
+          fn.apply(context, args)
+          timer = null
+        }, delay)
+
+      }
+    }
+
+    // function mythrottle(fn, delay) {
+    //   let pre = 0
+    //   return function () {
+    //     const cur = new Date()
+    //     if (cur - pre > delay) {
+    //       fn()
+    //       pre = new Date()
+    //     }
+    //   }
+
+    // }
+    const myFunction = mythrottle(() => {
+      const input = document.getElementById("input");
+      console.log(input.value);
+    }, 1000);
+
+
+  </script>
+</body>
+
 </html>
 ]
