@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		  <!-- <meta http-equiv="refresh" content="0;url=<c:url value="https://www.zzbdex.com/>" /> -->
+<!-- 		  <meta http-equiv="Refresh" content="0;url=http://darp.zzbdex.cn/index" /> -->
+
+		<title></title>
+		<style type="text/css">
+			.wrapper > p:has(bar) {
+				  background: orange;
+				  line-height: 12px;
+				}
+		</style>		
+	</head>
+	<body>
+		<div class="wrapper">
+		  <p><bar></p>
+		  <p><bar></p>
+		  <div>我是一个Div元素</div>
+		  <div>我是一个Div元素</div>
+		 
+
+		</div>
+	</body>
+	<script>
+	  
+
+	   function blobToFile(blob, fileName) {
+		  return new File([blob], fileName);
+		}
+
+	   function base64ToBlob(base64) {
+		   var mime = 'image/png'
+		    var bstr = atob(base64)
+		    var n = bstr.length
+		    u8arr = new Uint8Array(n);
+		  while (n--) {
+		    u8arr[n] = bstr.charCodeAt(n);
+		  }
+		  return new Blob([u8arr], {
+		    type: mime,
+		  });
+		}
+		const bolb = base64ToBlob(base64Str)
+
+		const res = blobToFile(bolb, '11.png')
+		console.log(res, 'res')
+	</script>
+</html>

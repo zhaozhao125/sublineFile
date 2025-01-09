@@ -1,37 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-</head>
-
-<body>
-  <script>
-    function my(name, age) {
-      console.log(this, "this");
-      this.name = name;
-      this.age = age;
-    }
-    my.prototype.say = function () {
-      console.log(this.name);
-    };
-    function MyNew(fn, ...args) {
-      if (typeof fn !== "function") {
-        throw new Error("错误");
+  <body>
+    <script>
+      function my(name, age) {
+        console.log(this, "this");
+        this.name = name;
+        this.age = age;
       }
-      const obj = Object.create(fn.prototype);
-      const res = fn.call(obj, ...args);
-      if (res) {
-        return res
+      my.prototype.say = function () {
+        console.log(this.name);
+      };
+      function MyNew(fn, ...args) {
+        if (typeof fn !== "function") {
+          throw new Error("错误");
+        }
+        const obj = Object.create(fn.prototype);
+        const res = fn.call(obj, ...args);
+        if (res) {
+          return res;
+        }
+        return obj;
       }
-      return obj;
-    }
-    const res = MyNew(my, "zhao", "111");
-    console.log("res: ", res);
-    res.say();
-  </script>
-</body>
+      const res = MyNew(my, "zhao", "111");
+      console.log("res: ", res);
+      res.say();
+      const arr = [
+        {
+          id: 1,
+        },
+        {
+          id: 2,
+        },
+      ];
+      const res1 = arr.reduce((pre, cur) => {
+        return [...pre, cur.id];
+      }, []);
+      console.log(res1, "res1");
 
+
+    </script>
+  </body>
 </html>

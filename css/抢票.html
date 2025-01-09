@@ -1,76 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <style>
-      .box {
-        height: 136px;
-        width: 400px;
-        border-radius: 12px;
-        background: #FFF0F1;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .btn {
-        width: 108px;
-        height: 54px;
-        border-radius: 8px;
-        font-size: 20px;
-        font-weight:600;
-        color: #fff;
-        background: #F00;
-        text-align:center;
-        line-height: 54px;
-        margin: 0 50px;
-      }  
-      .left {
-        flex:1;
-        margin: 0 0 0 50px;
-        overflow: hidden;
-      }
-      .main-title {
-        font-size: 22px;
-      }
-    
-     .sub-title {
-      overflow: hidden;
-  
-      text-overflow: ellipsis;
-      -webkit-line-clamp: 2;
-      word-break: break-all;
-     
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      }
-      /* .sub-title {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      } */
-    </style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <style>
+    .swiper-container {
+      width: 100%;
+      height: 100vh;
+    }
 
-    <!-- 
-    高度136px宽度4 0px 图角12px 背景色#FFFOF1左边距30px右边距24px，上下居中标题
-    24px粗体副标题22px 常规按钮宽度108px高度45px 圆角8px 字体20px 粗体背色#F00 -->
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .box {
+  width: 300px;
+  height: 300px;
+  background: pink;
+  border-radius: 16px; /* 初始圆角为0 */
+  transition: border-radius .3s linear; /* 设置圆角过渡效果 */
+}
 
-     <div class="box">
-        
-        <div class="left">
-          <div class="main-title">ddfdffdfdfd</div>
-          <div class="sub-title">
-            <span>
-              你的烦恼电脑你的烦恼给你答复功能高档看过你的哭给你看甘宁的风格你可否你能带给你对你的观点当看到你难道 你
-            </span>
-            </div>
-        </div>
-        <div class="btn">按钮</div>
-     </div>
-    </script>
-  </body>
+.box:hover {
+ border-radius: 16px 16px 0 0; /* 初始圆角为0 */
+}
+  </style>
+</head>
+<body>
+
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      <!-- Add more slides as needed -->
+    </div>
+    <!-- Add Navigation -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+  <div class="box"></div>>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on: {
+        init: function () {
+          // 设置初始时的动画效果
+          animateElements(this);
+        },
+        slideChangeTransitionStart: function () {
+          // 每次滑动开始时的动画效果
+          animateElements(this);
+        },
+      },
+    });
+
+    function animateElements(swiper) {
+      swiper.slides.forEach(function (slide) {
+        var progress = slide.progress;
+        var inner = slide.querySelector('.swiper-slide-inner');
+
+        // 使用 transform 进行环形旋转动画
+        inner.style.transform = 'rotate(' + progress * 360 + 'deg)';
+      });
+    }
+  </script>
+</body>
 </html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var sortBy = function (arr, fn) {
+        for (let i = 0; i < arr.length; i++) {
+          for (j = 0; j < arr.length - i; j++) {
+            if (fn(arr[j]) > fn(arr[j + 1])) {
+              // 正序
+              [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+          }
+        }
+        return arr;
+      };
+      const res1 = sortBy([5, 3, 4, 2, 1], (x) => x);
+      console.log("res1: ", res1);
+    </script>
+  </body>
+</html>

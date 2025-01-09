@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    console.log('start')
+    setTimeout(() => {
+      console.log('timer1')
+      Promise.resolve().then(function () {
+        console.log('promise1')
+      })
+    }, 5000)
+    setTimeout(() => {
+      console.log('timer2')
+      Promise.resolve().then(function () {
+        console.log('promise2')
+      })
+    }, 1000)
+    Promise.resolve().then(function () {
+      console.log('promise3')
+      Promise.resolve().then(function () {
+        console.log('promise4')
+      })
+    })
+    Promise.resolve().then(function () {
+      console.log('promise5')
+      Promise.resolve().then(function () {
+        console.log('promise6')
+      })
+    })
+    console.log('end')
+
+    // start end  promise3 promise5 promise4  promise6 timer1 promise1 timer2  promise2
+    // start end promise3 promise5 promise4 promise6 timer2  promise2 timer1 promise1
+  </script>
+</body>
+
+</html>

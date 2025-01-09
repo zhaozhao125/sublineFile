@@ -107,6 +107,25 @@
       }
 
       window.app = schedule();
+
+
+
+     function a() {
+       let arg1 = 1;
+       let arg2 = 2
+       change(arg1, arg2)
+       console.log(arg1, 'arge1')
+       console.log(arg2, 'arge2')
+     }
+     function change(x1, x2) {
+        let temp = x1;
+        x1 = x2;
+        x2 = temp
+         console.log(x1, 'x1')
+       console.log(x2, 'x2')
+     }
+     a()
+
     </script>
   </body>
 </html>

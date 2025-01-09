@@ -1,48 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
 </head>
+
 <body>
-	<script>
+  <script>
+    Function.prototype.myCall = function (context, ...args) {
+      console.log(args, 'args')
+      if (typeof context === "undefined") {
+        context = window;
+      }
+      // 防止覆盖掉原有属性
+      const mySymbol = Symbol();
+      // this 是需要执行的方法
+      context[mySymbol] = this;
+      console.log(this, '--this')
+      console.log(context, '--context')
+      const fn = context[mySymbol](...args);
+      delete context[mySymbol];
+      console.log(fn, 'fn')
+      return fn;
+    };
+    Function.prototype.myBind = function (context, ...rest) {
+      if (typeof context === "undefined") {
+        context = window;
+      }
+      console.log(this, 'this------------------')
+      const outThis = this
+      let cb = function (...args) {
+        // 绑定函数也可以使用 new 运算符构造，它会表现为目标函数已经被构建完毕了似的。提供的 this 值会被忽略，但前置参数仍会提供给模拟函数。
+        const isNew = new.target === undefined
+        const newArgs = [...rest, ...args];
+        outThis.apply(isNew ? context : this, newArgs);
+      };
+      cb.prototype = outThis.prototype;
+      return cb
+    };
 
-
-     Function.prototype.myCall = function(context, ...args) {
-     	 if (typeof context === 'undefined') {
-            context = window
-     	 }
-         const mySymbol = Symbol()
-         context[mySymbol] = this
-         const fn = context[mySymbol](...args)
-         delete context[mySymbol]
-         return fn
-     }
-    Function.prototype.myBind = function(context) {
-    	if (typeof context === 'undefined') {
-          context = window
-    	}
-    	const fn = this
-        const args1 = Array.prototype.slice.call(arguments, 1)
-        return function() {
-        	const bindArgs = Array.prototype.slice.call(arguments)
-        	const newArgs = [...args1, ...bindArgs]
-            return fn.apply(context, newArgs)
-        }
+    var obj = { name: 1, age: 2 }
+    var name = 'Leo', age = 18
+    function Fn(height, Gender) {
+      console.log('name：', this.name, 'age:', this.age, 'height:', height, 'Gender:', Gender)
     }
-	const person = {
-		name: 'tom',
-		say: function(arg) {
-			console.log(arg, 'arg')
-            console.log(this.name)
-		}
-	}
-    const obj = {
-    	name: 'tom3'
+    Fn.prototype.say = function () {
+      console.log('Fn.prototype.say')
     }
-    const mybind = person.say.myBind(obj, [1])
-    mybind('a')
+    var fn1 = Fn.myBind(obj, '80cm')
+    var obj1 = new fn1('male') // name： undefined age: undefined height: 80cm Gender: male
+    obj1.say() // Fn.prototype.say
+
+
+
+    // const person = {
+    //   name: "tom",
+    //   say: function (...arg) {
+    //     console.log(...arg, "arg---bind");
+    //     console.log(this.name);
+    //   },
+    // };
+    // const obj3 = {
+    //   name: "tom3",
+    // };
+    // const mybind = person.say.myBind(obj3, [1]);
+    // mybind("a");
+    // mybind("b");
+
+    // function fun(arg1, arg2) {
+    //   console.log(this.name)
+    //   console.log(arg1 + arg2)
+    // }
+    // const _this = {
+    //   name: 'zjp'
+    // }
+    // fun.myCall(_this, 1, 2)
+
+
+    // const arr1 = [1,2,3,4]
+    // const res = arr1.splice(1)
+    // console.log(res, 'res')
+    // console.log(arr1, 'arr1')
+
+
+
+    // Function.prototype.ownBind = function (context) {
+    //   context = (typeof context === 'object' ? context : window)
+    //   return (...args) => {
+    //     this.call(context, ...args)
+    //   }
+    // }
+
+    // function fun(arg1, arg2) {
+    //   console.log(this.name)
+    //   console.log(arg1 + arg2)
+    // }
+    // const _this = { name: 'YIYING' }
+    // // 只变更fun中的this指向，返回新function对象
+    // const newFun = fun.ownBind(_this)
+    // newFun(1, 2)
 
 
 
@@ -57,12 +115,7 @@
 
 
 
-
-
-
-
-
-
-	</script>
+  </script>
 </body>
+
 </html>

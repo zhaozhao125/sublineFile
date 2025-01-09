@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<ul>
+    <ul>
+        <li><a href='/home'>home</a></li>
+        <li><a href='/about'>about</a></li>
+
+        <div id="routeView"></div>
+    </ul>
+</ul>
+</body>
+<script>
+    let routerView = routeView
+    window.addEventListener('DOMContentLoaded', onLoad)
+    window.addEventListener('popstate', ()=>{
+        routerView.innerHTML = location.pathname
+    })
+    function onLoad () {
+        routerView.innerHTML = location.pathname
+        var linkList = document.querySelectorAll('a[href]')
+        console.log(linkList, 'linkList')
+        console.log(history, 'history')
+        linkList.forEach(el => el.addEventListener('click', function (e) {
+          console.log(el.getAttribute('href'), 'hrefs')
+            e.preventDefault()
+            history.pushState(null, '', el.getAttribute('href'))
+            routerView.innerHTML = location.pathname
+        }))
+    }
+
+    var name="lucy";
+let obj={
+ name:"martin",
+ say:function () {
+ console.log(this.name);
+ }
+};
+obj.say(); //martin，this指向obj对象
+setTimeout(obj.say,0); //lucy，this指向window对象
+
+console.log(Math.max([1, 2, 3]), '最大值')
+
+</script>
+</html>

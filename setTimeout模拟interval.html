@@ -4,51 +4,153 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>	
+    #dataButton{
+    width: 45px;
+    height: 24px;
+    top: 409px;
+    left: 1293px;
+}
+ 
+#data{
+    width: 643px;
+    height: 269px;
+    position: absolute;
+    top: 449px;
+    left: 694px;
+    display: none;
+    z-index: 11;
+}
+ 
+#data2{
+    width: 643px;
+    height: 269px;
+    position: absolute;
+    top: 449px;
+    left: 694px;
+    display: none;
+    z-index: 11;
+}
+ 
+ 
+#dataPic{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    transform: rotateY(180deg);
+    animation: flip2 2s linear;
+    animation-fill-mode: forwards;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0px;
+}
+ 
+#dataPic2 {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    position: absolute;
+    top: 0px;
+    animation: flip1 2s linear;
+    animation-fill-mode: forwards;
+    backface-visibility: hidden;
+}
+ 
+#dataPic1,
+#dataPic21 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+ 
+#dataPic21 {
+    animation: flip3 2s linear;
+    animation-fill-mode: forwards;
+    backface-visibility: hidden;
+}
+ 
+#dataPic1 {
+    transform: rotateY(180deg);
+    animation: flip4 2s linear;
+    animation-fill-mode: forwards;
+    backface-visibility: hidden;
+}
+
+@keyframes flip1{
+    0%{
+        transform: rotateY(0deg);
+    }
+    100%{
+        transform: rotateY(180deg);
+    }
+}
+@keyframes flip2{
+    0%{
+        transform: rotateY(180deg);
+    }
+    100%{
+        transform: rotateY(360deg);
+    }
+}
+
+
+
+@keyframes flip3{
+    0%{
+        transform: rotateY(180deg);
+    }
+    100%{
+        transform: rotateY(0deg);
+    }
+}
+@keyframes flip4{
+    0%{
+        transform: rotateY(360deg);
+    }
+    100%{
+        transform: rotateY(180deg);
+    }
+
+}
+
+
+    </style>
   </head>
   <body>
-    <script>
-      function printNumber(to, from) {
-        let count = to;
-        let timer = null;
-        function fn() {
-          console.log(count, "count");
-          if (count < from) {
-            timer = setTimeout(() => {
-              clearTimeout(timer);
-              count++;
-              fn();
-            }, 1000);
-          }
-        }
-        fn();
-        return () => {
-          clearTimeout(timer);
-        };
-      }
-      // const clear = printNumber(1, 5);
+  
+<div id="dataButton" class="button" onclick="clickFn3('data','data2')"></div>
+        <div id="data">
+            <div id="dataPic">
+                <img src="http://www.zzbdex.com.cn/data-deal-website/common/minio/downloadFile?fileName=20241030154014891BD742362D33E40DDA0AA7D077BD1EB00.jpg" width="100%" height="100%">
+            </div>
+            <div id="dataPic2">
+                <img src="http://www.zzbdex.com.cn/data-deal-website/common/minio/downloadFile?fileName=202410301540226397E948E659CA24AEA956BAD3BF5AEA357.jpg" width="100%" height="100%">
+            </div>
+        </div>
+        <div id="data2">
+            <div id="dataPic1">
+                <img src="http://www.zzbdex.com.cn/data-deal-website/common/minio/downloadFile?fileName=20241030154014891BD742362D33E40DDA0AA7D077BD1EB00.jpg" width="100%" height="100%">
+            </div>
+            <div id="dataPic21">
+                <img src="http://www.zzbdex.com.cn/data-deal-website/common/minio/downloadFile?fileName=202410301540226397E948E659CA24AEA956BAD3BF5AEA357.jpg" width="100%" height="100%">
+            </div>
+        </div>
 
-      function myTimer(to, from) {
-        let timer = null;
-        let count = to;
-        function fn() {
-          console.log(count, "执行");
-          if (count < from) {
-            count++;
-            timer = setTimeout(() => {
-              clearTimeout(timer);
-              fn();
-            }, 1000);
-          }
-        }
-        fn();
-        return () => {
-          clearTimeout(timer);
-        };
-      }
-      const clear = myTimer(1, 5);
-      setTimeout(() => {
-        clear();
-      }, 2000);
+
+    <script>
+     function clickFn(target,target2) {
+    target = document.getElementById(target);
+    target2 = document.getElementById(target2);
+    var display = target.style.display;
+    if(display != 'block') {
+        target.style.display = 'block';
+        target2.style.display = 'none';
+    }else{
+        target.style.display = 'none';
+        target2.style.display = 'block';
+    }
+}
     </script>
   </body>
 </html>
