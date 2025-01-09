@@ -1,37 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>css</title>
-  </head>
-  <body>
-    <script>
-      const files = ["/usr/bin", "/usr/bin/config", '"/usr/bin/config'];
-      const filesInit = files.map((ele) => {
-        return ele.split('/').slice(1)
-      });
-      let flag = true;
-      const res = [];
-      for (let i = 0; i < filesInit[0].length; i++) {
-        for (let j = 0; j < filesInit.length; j++) {
-          if (filesInit[j][i] !== filesInit[0][i]) {
-            flag = false;
-            break;
-          }
-        }
-        if (flag) {
-          res.push(filesInit[0][i]);
+
+<head>
+  <meta charset="utf-8" />
+  <title>css</title>
+</head>
+
+<body>
+  <script>
+    const files = ["/usr/bin", "/usr/bin/config", '"/usr/bin/config'];
+    const filesInit = files.map((ele) => {
+      return ele.split('/').slice(1)
+    });
+    let flag = true;
+    const res = [];
+    for (let i = 0; i < filesInit[0].length; i++) {
+      for (let j = 0; j < filesInit.length; j++) {
+        if (filesInit[j][i] !== filesInit[0][i]) {
+          flag = false;
+          break;
         }
       }
-      var chunk = function (arr, size) {
-        let res = [];
-        while (arr.length) {
-          res.push(arr.splice(0, size));
-        }
-        return res;
-      };
-      const res1 = chunk([1, 2, 3, 4], 2);
-      console.log("res1: ", res1);
-    </script>
-  </body>
+      if (flag) {
+        res.push(filesInit[0][i]);
+      }
+    }
+
+  </script>
+</body>
+
 </html>

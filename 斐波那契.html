@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>css</title>
-  </head>
 
-  <body>
-    <div class="viewport">
-      <!-- <div class="container">
+<head>
+  <meta charset="utf-8" />
+  <title>css</title>
+</head>
+
+<body>
+  <div class="viewport">
+    <!-- <div class="container">
       
         <div class="article">
 
@@ -20,81 +21,54 @@
             </div>
           </div>
       </div> -->
-    </div>
+  </div>
 
-    <style type="text/css">
-      .top-content {
-        height: 500px;
-        width: 100%;
-      }
-      .viewport {
-        width: 50%;
-        overflow: hidden;
-        height: 500px;
-      }
-      /* 容器元素 */
-      .container {
-        overflow: auto;
-        height: 100%;
-      }
-      /* 粘性约束元素 */
-      .article {
-        margin-bottom: 10px;
-      }
-      /* sticky 元素 */
-      .sticky-header {
-        position: sticky;
-        bottom: 0;
-        padding: 5px 0;
-        background-color: #fff;
-      }
-      .article-content {
-        height: 1000px;
-      }
-    </style>
-    <script>
-      /*
-         斐波那契数列
-         0,1,1,2,3,5,8
-       */
-      function fibNormal(n) {
-        if (n <= 1) {
-          return n;
-        }
-        return fibNormal(n - 1) + fibNormal(n - 2);
-      }
-      const fibNormalres = fibNormal(14);
-      /*
-         斐波那契缓存：动态规划
-         0,1,1,2,3,5,8
-       */
 
-      function fibDp(n) {
-        const array = [0, 1];
-        for (var i = 2; i <= n; i++) {
-          array[i] = array[i - 1] + array[i - 2];
-        }
-        console.log(array, 'array')
-        return array[n];
+  </style>
+  <script>
+    /*
+       斐波那契数列
+       0,1,1,2,3,5,8
+     */
+    function fibNormal(n) {
+      if (n <= 1) {
+        return n;
       }
-      const res = fibDp(6);
-      console.log("res: ", res);
-      function findIndex(num) {
-        let pre = 0;
-        let cur = 1;
-        let sum = 0;
-        let index = 1;
-        while (sum < num) {
-          let temp = cur;
-          sum = pre + cur;
-          pre = temp;
-          cur = sum;
-          index++;
-        }
-        return sum === num ? index : -1
+      return fibNormal(n - 1) + fibNormal(n - 2);
+    }
+    const fibNormalres = fibNormal(14);
+    /*
+       斐波那契缓存：动态规划
+       0,1,1,2,3,5,8
+     */
+
+    function fibDp(n) {
+      const array = [0, 1];
+      for (var i = 2; i <= n; i++) {
+        array[i] = array[i - 1] + array[i - 2];
       }
-      const index = findIndex(2);
-      console.log("index: ", index);
-    </script>
-  </body>
+      console.log(array, 'array')
+      return array[n];
+    }
+    const res = fibDp(6);
+    console.log("res: ", res);
+    function findIndex(num) {
+      let pre = 0;
+      let cur = 1;
+      let sum = 0;
+      let index = 1;
+      while (sum < num) {
+        let temp = cur;
+        sum = pre + cur;
+        pre = temp;
+        cur = sum;
+        index++;
+      }
+      return sum === num ? index : -1
+    }
+    const index = findIndex(2);
+    console.log("index: ", index);
+  </script>
+</body>
+
 </html>
