@@ -1,52 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenLayers Example</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css" type="text/css">
+  <style>
+    .map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
 </head>
-<style>
-	div{
-		height: 100%;
-	}
-	.clear-fix{
-		display: flex;
-	}
-	.left {
-		width: 200px;
-	}
-	.right{
-		width: 200px;
-	}
-	.middle {
-		flex:1;
-	}
-
-</style>
 <body>
-	<div class='clear-fix'>
-		<div class="left">left</div>
-		<div class='middle'>
-		   偶极热i人体而同日嗯i体贴人贴合tire提儿胡同日俄他和日托和肉体嘿嘿他和日托和和特瑞特和特人th
-		</div>
-		
-		<div class='right'>right</div>
-	</div>
-	<script>
-		var str = '012345678'
-		var res = str.slice(0,2)
-		var resSubtring = str.substring(0,2)
-		const resSubstr = str.substr(0,2)
-		console.log(str,res,resSubtring, resSubstr)
+  <div id="map" class="map"></div>
+  <script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script>
+  <script>
+    // 初始化地图
+    const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        })
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([0, 0]),
+        zoom: 2
+      }),
+      controls: ol.control.defaults().extend([
+        new ol.control.Zoom()
+      ])
+    });
 
-		 const defaultParams = {
-        sortType: 'createTime',
-        order: 'DESC',
-        type:11, // 模板是1，默认为0
-      };
+    // 添加标记
+    const marker = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([0, 0]))
+    });
 
-     console.log({...defaultParams})
+    const markerLayer = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        features: [marker]
+      }),
+      style: new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5, 1],
+          src: 'https://openlayers.org/en/v6.4.3/examples/data/icon.png'
+        })
+      })
+    });
 
-	</script>
+    map.addLayer(markerLayer);
+  </script>
 </body>
 </html>

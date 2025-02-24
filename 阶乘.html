@@ -16,6 +16,14 @@
     }
     console.log(sum);
 
+    function jie(num) {
+      if (num == 1) {
+        return num
+      } else {
+        return num * jie(num - 1);
+      }
+    }
+    console.log(jie(5), '5的阶乘')
   </script>
 </body>
 

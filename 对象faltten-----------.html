@@ -33,26 +33,62 @@
             let objInit = {}
             function fn(cur, pre) {
                 if (typeof cur === 'object') {
+                    // 数组
                     if (Array.isArray(cur)) {
                         cur.forEach((ele, index) => {
-                            fn(ele, `${pre}[${index}] `)
+                            fn(ele, `${pre}[${index}]`)
                         })
                     } else {
+                        // 对象
                         for (let key in cur) {
-                            fn(cur[key], `${pre}${pre ? '.' : ''}${key} `)
+                            fn(cur[key], `${pre}${pre ? '.' : ''}${key}`)
                         }
                     }
-
-
                 } else {
-                    objInit[pre] = cur
+                    objInit[`${pre}`] = cur
                 }
-
             }
             fn(obj, '')
             return objInit
-
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // function faltten(obj) {
+        //     let objInit = {}
+        //     function fn(cur, pre) {
+        //         if (typeof cur === 'object') {
+        //             if (Array.isArray(cur)) {
+        //                 cur.forEach((ele, index) => {
+        //                     fn(ele, `${pre}[${index}] `)
+        //                 })
+        //             } else {
+        //                 for (let key in cur) {
+        //                     fn(cur[key], `${pre}${pre ? '.' : ''}${key} `)
+        //                 }
+        //             }
+        //         } else {
+        //             objInit[pre] = cur
+        //         }
+        //     }
+        //     fn(obj, '')
+        //     return objInit
+        // }
         const res = faltten(obj)
         console.log('res: ', res);
     </script>

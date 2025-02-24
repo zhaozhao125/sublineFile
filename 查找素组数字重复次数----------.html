@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var uniqueOccurrences = function (arr) {
+
+      //  const myMap = new Map();
+      //  for (let v of arr) {
+      //     myMap.set(v, (myMap.get(v) || 0) + 1)
+      //  }
+      //  console.log(myMap, 'myMap')
+      //  console.log(myMap.values(), 'myMap')
+      //  Math.max(...[...myMap.values()])
+
+
+
+
+
+
+
+      // 记录每个元素出现次数
+      let map = new Map();
+      arr.forEach((x) => {
+        // map.set(x, (map.get(x) || 0) + 1);
+        map.set(x, (map.get(x) || 0) + 1);
+      });
+      // Set() 里的元素是不重复的。如果有元素出现次数相同，则最后的set的长度不等于map的长度
+      console.log(map.size, "1");
+      console.log(map.values(), "2");
+      console.log(new Set(map.values()).size, "3");
+      const max = Math.max(...[...map.values()]);
+      let maxKey = "";
+
+      for (let ele of map.entries()) {
+        console.log(ele, "entry");
+        const [key, value] = ele;
+        if (value === max) {
+          maxKey = key;
+        }
+      }
+      console.log("maxKey: ", maxKey);
+      // return map.size === new Set(map.values()).size;
+    };
+    const res1 = uniqueOccurrences([1, 2, 3, 4, 3, 2]);
+  </script>
+</body>
+
+</html>

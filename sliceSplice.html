@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+        <ul>
+            <li>nowcoder</li>
+        </ul>
+    </body>
+    <script type="text/javascript">
+        // const lis  = document.getElementByTagName('li')
+           const lis  = document.getElementsByTagName('li')
+        lis[0].addEventListener('click', (e) => {
+            console.log(123)
+            e.stopPropagation()
+        })
+        // 补全代码
+    </script>
+</html>

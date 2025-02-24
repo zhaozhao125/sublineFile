@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+    /* 填写样式 */
+  </style>
+</head>
+
+<body>
+  <!-- 填写标签 -->
+  <script type="text/javascript">
+    // 填写JavaScript
+    function count(str) {
+      const strArr = [...str]
+      let obj = {
+      }
+      for (let i of strArr) {
+        if (obj[i]) {
+          obj[i] = obj[i] + 1
+        } else {
+          obj[i] = 1
+        }
+      }
+      return obj
+    }
+    const res = count('abcabc')
+    console.log(res, 'res')
+  </script>
+</body>
+
+</html>

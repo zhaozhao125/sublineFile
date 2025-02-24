@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+    .wrap {
+       /* 方式1： 父元素这是overflow:hidden; 触发块级格式化上下文 */
+      /* overflow: hidden; */
+      /*补全代码*/
+
+    }
+    /* 方式2： 添加为元素伪元素，并清除浮动 */
+    .wrap::before {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    /* 添加新元素，并清除浮动 */
+    .right1 {
+      clear: both;
+    }
+
+    .left {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      float: left;
+      /*补全代码*/
+
+    }
+
+    .right {
+      width: 100px;
+      height: 100px;
+      float: left;
+      background-color: yellow;
+      /*补全代码*/
+
+    }
+    
+  </style>
+</head>
+
+<body>
+  <div class='wrap'>
+    <div class='left'></div>
+    <div class='right'></div>
+    <div class='right1'></div>
+  </div>
+  <script type="text/javascript">
+    /* 填写JavaScript */
+
+  </script>
+</body>
+
+</html>
