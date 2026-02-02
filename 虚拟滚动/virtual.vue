@@ -1,0 +1,195 @@
+<!--
+ * @Author: atdow
+ * @Date: 2022-11-18 10:41:36
+ * @LastEditors: null
+ * @LastEditTime: 2023-11-16 00:25:52
+ * @Description: file description
+-->
+<template>
+  <div class="virtual-list" :style="virtualListContainerStyle" ref="containerRef">
+    <!-- <SinoScrollbar style="height: 100%" class="scrollbar" @scroll="scrollResolve" ref="scrollbarRef">
+
+      <div class="list-view-phantom" ref="clientHeightRef" :style="{ height: virtualContentHeight + 'px' }"></div>
+      <ul  class="option-warp" ref="contentRef">
+        <li :style="{ height: itemHeight + 'px' }" class="option" v-for="(item, index) in virtualRenderData"
+          :key="index">
+          <slot :item="item" :index="index"></slot>
+        </li>
+        <slot name="bottom"></slot>
+      </ul>
+
+    </SinoScrollbar>  -->
+    <div style="height: 100%" class="scrollbar" @scroll="scrollResolve" ref="scrollbarRef">
+      <!-- 这里是用于撑开高度，出现滚动条用 -->
+      <div class="list-view-phantom" ref="clientHeightRef" :style="{ height: virtualContentHeight + 'px' }"></div>
+      <ul  class="option-warp" ref="contentRef">
+        <li :style="{ height: itemHeight + 'px' }" class="option" v-for="(item, index) in virtualRenderData"
+          :key="index">
+          <slot :item="item" :index="index"></slot>
+        </li>
+        <slot name="bottom"></slot>
+      </ul>
+
+    </div> 
+  </div>
+</template>
+ 
+<script>
+import SinoScrollbar from './scrollbar'
+export default {
+  name: 'VirtualList',
+  props: {
+    data: {
+      type: Array,
+      require: true,
+      default: function () {
+        return []
+      },
+    },
+    itemHeight: {
+      type: Number,
+      default: 30,
+      require: true,
+    },
+    bufferCount: {
+      type: Number,
+      default: 3,
+    },
+    // 当data更新时，是否自动滚到到顶部
+    defaultUpdateToTop: {
+      type: Boolean,
+      default: true,
+    },
+    fixedContainerHeight: {
+      type: Boolean,
+      default: true,
+    },
+    maxHeight: {
+      type: Number,
+      default: 200,
+    },
+  },
+  data() {
+    return {
+      containerHeight: 200,
+      virtualContentHeight: 0,
+      virtualRenderData: [],
+      currentScrollTop: 0,
+    }
+  },
+  components: {
+    SinoScrollbar,
+  },
+  watch: {
+    data: {
+      immediate: true,
+      handler: function () {
+        // 清空数据和使用$nextTick为了弹窗秒开和数据卡死
+        this.virtualRenderData = []
+        this.virtualContentHeight = this.itemHeight * this.data.length
+        this.$nextTick(() => {
+          this.updateContainerHeight()
+          if (this.defaultUpdateToTop) {
+            this.scrollToTop()
+          }
+          console.log('update')
+          console.log(this.currentScrollTop, 'this.currentScrollTop')
+          this.update(this.currentScrollTop)
+        })
+      },
+    },
+  },
+  computed: {
+    virtualListContainerStyle: function () {
+      if (this.fixedContainerHeight === true) {
+        return { height: '100%' }
+      } else {
+        return { height: this.containerHeight + 'px' }
+      }
+    },
+  },
+  created() { },
+  mounted() { },
+  methods: {
+    scrollToTop() {
+      this.currentScrollTop = 0
+      // this.$refs.scrollbarRef.resetToTop()
+    },
+    updateContainerHeight() {
+      if (this.fixedContainerHeight === true) {
+        this.containerHeight = this.$refs.containerRef.getBoundingClientRect().height
+        return
+      }
+      const height = this.itemHeight * this.data.length
+      // 动态高度
+      if (height > this.maxHeight || height === 0) {
+        this.containerHeight = this.maxHeight
+      } else {
+        this.containerHeight = height
+      }
+    },
+    // 更新数据
+    update(scrollTop = 0) {
+      console.log(scrollTop, 'scrollTop')
+
+      this.$nextTick(() => {
+
+        // 获取当前可展示数量
+        const count = Math.ceil(this.containerHeight / this.itemHeight)
+        const start = Math.floor(scrollTop / this.itemHeight)
+        // 取得可见区域的结束数据索引
+        const end = start + count + this.bufferCount
+        // 计算出可见区域对应的数据，让 Vue.js 更新
+        this.virtualRenderData = this.data.slice(start, end)
+        this.$refs.contentRef.style.webkitTransform = `translate3d(0, ${start * this.itemHeight}px, 0)`
+        console.log(this.virtualRenderData, 'this.virtualRenderData')
+        // console.log('this.virtualRenderData:', this.virtualRenderData)
+      })
+    },
+    scrollResolve(data) {
+      console.log(data, 'data')
+      const  scrollTop  = data.target.scrollTop
+      this.update(scrollTop)
+      this.currentScrollTop = scrollTop
+    },
+    resetToTopUpdate() {
+      this.$nextTick(() => {
+        this.scrollToTop()
+        this.update(0)
+      })
+    },
+
+    scrollTo(top) {
+      this.currentScrollTop = top
+      // this.$refs.scrollbarRef.resetToTop()
+    },
+  },
+  beforeDestroy() { },
+}
+</script>
+ 
+<style lang="less" scoped>
+
+.virtual-list {
+  /deep/ .sino-scrollbar__view {
+    position: relative;
+  }
+  .scrollbar {
+    overflow: scroll;
+    position: relative;
+    background: pink;
+  }
+  .list-view-phantom {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: -1;
+  }
+
+  .option-warp {
+    margin-bottom: 0;
+    background: yellow;
+  }
+}
+</style>

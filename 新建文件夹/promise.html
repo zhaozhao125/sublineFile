@@ -8,58 +8,6 @@
 </head>
 <body>
     <script>
-        
-        // class Promise {
-        //     constructor(executor) {
-        //        this.status = 'pending'
-        //        this.value = undefined
-        //        this.reson = undefined
-        //        this.resolveFns = []
-        //        this.rejectFns = []
-        //        let resolve = (data) => {
-        //           if (this.status === 'pending') {
-        //              this.status = 'resolve'
-        //              this.value = data
-        //              this.resolveFns.forEach(fn => fn(data))
-        //           }
-        //        }
-        //        let reject = (data) => {
-        //          if (this.status === 'pending') {
-        //              this.status = 'reject'
-        //              this.reson = data
-        //              this.rejectFns.forEach(fn => fn(data))
-        //          }
-        //        }
-        //        try {
-        //           executor(resolve, reject)
-        //        } catch {
-
-        //        }
-        //     }
-        //     then(resolve, reject) {
-        //         if ( this.status == 'resolve') {
-        //             resolve(this.value)
-        //         }
-        //         if ( this.status == 'reject') {
-        //             resolve(this.reson)
-        //         }
-        //         if (this.status == 'pending') {
-        //             this.resolveFns.push(resolve)
-        //         }
-        //         if (this.status == 'pending') {
-        //            this.rejectFns.push(reject)
-        //         }
-        //     }
-
-       
-        // }
-        // const myPromise = new Promise((resolve, relect) => {
-        //     setTimeout(() => {
-        //         resolve('成功了')
-        //     }, 1000)
-        // }).then((res) => {
-        //    console.log(res, 'res')
-        // })
 
         const PENDING = 'PENDING';
 const FULFILLED = 'FULFILLED';
@@ -211,20 +159,20 @@ class Promise {
   }
 }
 
-const promise = new Promise((resolve, reject) => {
-  reject('失败');
-}).then().then().then(data=>{
-  console.log(data);
-},err=>{
-  console.log('err',err);
-})
-
 // const promise = new Promise((resolve, reject) => {
-//   setTimeout(() => {reject('失败了');}, 1000)
+//   reject('失败');
+// }).then().then().then(data=>{
+//   console.log(data);
+// },err=>{
+//   console.log('err',err);
+// })
+
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {reject('失败了');}, 1000)
   
-// }).then((res) => {
-//     console.log(res, '成功')
-// }, (err) => {console.log(err, '失败')})
+}).then((res) => {
+    console.log(res, '成功')
+}, (err) => {console.log(err, '失败')})
 
 
     </script>
